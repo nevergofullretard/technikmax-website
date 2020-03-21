@@ -1,0 +1,264 @@
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+    {%if des%}
+    <meta name="description" content="{{des}}">
+    {%else%}
+    <meta name="description" content="Tech Blog und Projekte">
+    {%endif%}
+
+    {%if keywords%}
+    <meta name="keywords" content="{{keywords}}">
+    {%else%}
+    <meta name="keywords" content="Programming">
+    {%endif%}
+
+
+
+    {%if title%}
+    <title>{{title}} | Max Hunter</title>
+    {%else%}
+    <title>Max Hunter</title>
+    {%endif%}
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'blog/main.css' %}">
+
+
+
+    <link rel="stylesheet" type="text/css" href="{% static 'blog/style3.css' %}">
+
+    <style>
+    a:hover {
+    text-decoration:none;
+    }
+
+    a:hover span:hover {
+    background-color: #6699ff !important;
+    color: white !important;
+    }
+</style>
+
+    <!--OLD JAVASCRIPT BEFORE TRANSITION-->
+<!-- Jquery needed -->
+
+
+
+
+
+<!-- Optional JavaScript -->
+     <!--jQuery first, then Popper.js, then Bootstrap JS-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+</head>
+<body style="background-color:#f2f2f2;">
+
+
+
+<div class="hero-image">
+
+
+    <nav id="navbar" class="selfmade-nav">
+        <div class="nav-container">
+            <div class="logo">
+                <a href="{% url 'blog-home' %}">Max Hunter</a>
+            </div>
+
+            <div id="mainListDiv" class="main_list">
+                <ul class="navlinks">
+                    <!--<li><a href="">Blog</a></li>-->
+                    <li><a href="{%url 'blog-home'%}">Home</a></li>
+
+                    {% load types %}
+                    {% types %}
+                    <li><a href="{%url 'categories'%}">Themen</a></li>
+                    <li><a href="{%url 'about'%}">About</a></li>
+
+
+                    <li>
+
+
+
+
+
+                        <!--<div class="dropdown">-->
+                        <!--<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+                        <!--Dropdown button-->
+                        <!--</button>-->
+                        <!--<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">-->
+                        <!--<a class="dropdown-item" href="#">Action</a>-->
+                        <!--<a class="dropdown-item" href="#">Another action</a>-->
+                        <!--<a class="dropdown-item" href="#">Something else here</a>-->
+                        <!--</div>-->
+                        </li>
+
+
+                </ul>
+            </div>
+            <span class="navTrigger">
+                <i></i>
+                <i></i>
+                <i></i>
+            </span>
+        </div>
+    </nav>
+
+
+{% block herotext %}{% endblock %}
+</div>
+
+<div class="wrap" style="margin-top: 10px">
+
+
+    <div id="base-container" class="container main">
+
+
+
+
+
+
+
+       <!-- all other page content (for page footer) -->
+
+
+     {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ messages.tags }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+            {% block content %}{% endblock %}
+
+
+    </div>
+</div>
+
+
+
+
+
+    <script>
+
+
+        $(window).scroll(function() {
+            if ($(document).scrollTop() > 50) {
+                $('.selfmade-nav').addClass('affix');
+                console.log("OK");
+
+            } else {
+                $('.selfmade-nav').removeClass('affix');
+
+            }
+
+            if ($(document).scrollTop() > 250 || $(".navTrigger").hasClass('active')) {
+                $("#hero-text").hide("fast");
+            } else {
+                $("#hero-text").show("fast");
+            }
+
+
+
+        });
+
+
+        $('.navTrigger').click(function () {
+    $(this).toggleClass('active');
+    console.log("Clicked menu");
+    $("#mainListDiv").toggleClass("show_list");
+    $("#mainListDiv").fadeIn();
+
+});
+
+    </script>
+
+
+
+
+   <!--</div>-->
+
+
+
+<footer style="background:#d6d6c2;" class="footer" >
+    <div class="container " >
+        <div class="row justify-content-md-center" style="padding:20px;">
+            <div class="col col-lg-2" style="padding-bottom: 20px;">
+             <a target="_blank" href="https://twitter.com/maxi_jaeger" class="a-black"><img width="50px" height="auto" src="/static/blog/twitter-icon.png" alt="Twitter icon by Icons8"></a>
+            </div>
+
+             <div class="col col-lg-2" style="padding-bottom: 20px;">
+             <a target="_blank" href="https://github.com/nevergofullretard" class="a-black"><img width="50px" height="auto" src="/static/blog/github-icon.png" alt="GitHub icon by Icons8"></a>
+            </div>
+
+            <div class="col col-lg-2" style="padding-bottom: 20px;">
+             <a target="_blank" href="https://facebook.com/maximilian.jager.165" class="a-black"><img width="50px" height="auto" src="/static/blog/facebook-icon.png" alt="Facebook icon by Icons8"></a>
+            </div>
+
+            <div class="col col-lg-2" style="padding-bottom: 20px;">
+             <a target="_blank" href="https://www.instagram.com/maxe_jaeger/" class="a-black"><img width="50px" height="auto" src="/static/blog/instagram-icon.png" alt="Instagram icon by Icons8"></a>
+            </div>
+        </div>
+
+
+        <div class="row justify-content-md-center" style="padding:20px;">
+            <div class="col col-lg-2" style="padding-bottom: 20px;">
+            <a  class="a-black" href="{%url 'about'%}">Über mich</a>
+        </div>
+             <div class="col col-lg-2" style="padding-bottom: 20px;">
+            <a   class="a-black" href="{% url 'kontakt' %}">Kontakt</a>
+        </div>
+            <div class="col col-lg-2" style="padding-bottom: 20px;">
+            <a  class="a-black" href="{% url 'impressum' %}">Impressum & Datenschutz</a>
+        </div>
+
+
+
+             <div class="col col-lg-2" style="padding-bottom: 20px;">
+            <a   class="a-black" href="{% url 'login' %}">Login</a>
+        </div>
+
+        </div>
+        {% if user.is_authenticated %}
+                <div class="row justify-content-md-center">
+
+                <div class="col col-lg-2">
+                    <a  class="a-black" href="{%url 'post-create'%}">Blogpost</a>
+                </div>
+                <div class="col col-lg-2">
+                    <a  class="a-black" href="{%url 'upload-image'%}">Bild</a>
+                </div>
+                <div class="col col-lg-2">
+                    <a  class="a-black" href="/admin">Admin</a>
+                </div>
+                <div class="col col-lg-2">
+                    <a  class="a-black" href="{%url 'logout'%}">Log Out</a>
+                </div>
+                </div>
+
+
+
+
+
+        {%endif%}
+
+    </div>
+
+</footer>
+ <!--</div>-->
+</body>
+</html>

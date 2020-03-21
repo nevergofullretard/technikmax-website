@@ -1,0 +1,30 @@
+{% extends "blog/base.html" %}
+{% block content %}
+
+<h1>{{cat}}</h1>
+
+<div class="article_box" style="margin: 3%; padding: 5%; text-align:center">
+    <span style="font-size: 1.3rem">{{des}}</span>
+</div>
+
+
+<div style="margin-bottom: 20px; text-align:center;">
+    {%if pre%}
+        <span style="font-size: 2rem;">{{pre}}<span style="color: {{color}}">{{title}}</span></span>
+
+    {%else%}
+        <span style="font-size: 2rem; margin-bottom: 20px;">{{title}}</span>
+    {%endif%}
+</div>
+
+<div style="text-align:center; margin-top: 3% ">
+        <span class="arrow-down"></span>
+    </div>
+
+
+
+
+
+{% include "blog/blogs_projects.html" %}
+
+{% endblock content %}

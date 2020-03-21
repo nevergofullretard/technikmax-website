@@ -1,0 +1,33 @@
+{%for object in newest%}
+
+
+             <a href="{% url 'post-detail' pk=object.id name=object.title_tag %}"  style="text-decoration: none;">
+
+            <div class="article_box" >
+           {% if object.background_image %}
+                <div class="fill background_image" style="background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),url('{{object.background_image.image.url}}')" >
+                </div>
+            {%else%}
+
+                <div class="fill" style="padding:3%; background-color:{{object.type.color}}; border-radius: 25px 25px 0px 0px; " >
+                </div>
+            {%endif%}
+
+    <div class="content_box">
+        <h2 style="margin-bottom: 10px; font-size: 2.5rem">{{object.title}}</h2>
+        {% for cat in object.categories.all %}
+            <span class="category_box" style="color:{{cat.section.color}};" >{{cat}}</span>
+
+          {%endfor%}
+
+        <div style="padding-top: 20px;">
+            <p style="font-size: 1.2rem">{{object.description}}</p>
+        <p style="text-decoration: underline;">Mehr lesen...</p>
+        </div>
+
+    </div>
+
+
+                </div>
+             </a>
+{%endfor%}

@@ -1,0 +1,146 @@
+{% extends "blog/base.html" %}
+
+
+{% block herotext %}
+
+<style>
+    .hero-image{
+    height:100vh;
+    }
+
+
+</style>
+
+<script>
+$( "#navbar" ).removeClass( "navbar-background" )
+
+
+//      function addMeta (title, des, keywords, robots) {
+//       $('#base-title').text(title);
+//       $('meta[name ="description"]').attr("content", des);
+//       $('meta[name ="keywords"]').attr("content", keywords);
+//       $('meta[name ="robots"]').attr("content", robots);
+//       console.log($('meta[name ="description"]').attr("content"));
+//         return 0;
+//       }
+
+// console.log($('meta[name ="description"]').attr("content"));
+
+
+
+</script>
+
+
+
+    <h1 id="hero-text" class="hero-text" style="color:white; font-stretch:expanded ">{{title}}</h1>
+
+{% endblock herotext%}
+
+{% block content %}
+
+
+<div style="margin-top: 5%; text-align:center;">
+    <span style="font-size:1.6rem; ">{{des}}</span>
+    <hr style="margin-bottom: 5%; margin-top: 5%;">
+    <p style="font-size:1.5rem; ">Heiße Topics</p>
+    {%for topic in topics%}
+     <a href="{% url 'category-detail' name=topic.name %}">
+        <span class="category_box" style="background-color:#d9d9d9 ;color:{{topic.section.color}}; font-size: 1.2rem" >{{topic}}</span>
+     </a>
+    {%endfor%}
+
+    <hr style="margin-top: 5%; margin-bottom: 5%;">
+    <div style="font-size: 1.5rem;">
+    <span > Neueste </span>
+
+        {%if types|length < 2%}
+            {%for type in types%}
+                <span>{{type}}</span>
+            {%endfor%}
+        {%elif types|length == 2%}
+            {%for type in types%}
+                {%if forloop.last%}
+                    <span>{{type}}</span>
+                {%else%}
+                    <span>{{type}} & </span>
+                {%endif%}
+            {%endfor%}
+
+        {%elif types|length > 2%}
+            {%for type in types%}
+                {%if forloop.last%}
+                    <span> & {{type}}</span>
+                {%elif forloop.first%}
+                    <span>{{type}}</span>
+                {%else%}
+                   <span>, {{type}}</span>
+                {%endif%}
+            {%endfor%}
+
+        {%endif%}
+        </div>
+
+
+
+
+
+</div>
+
+    <div style="text-align:center; margin-top: 20px; margin-bottom: 20px; ">
+        <span class="arrow-down"></span>
+    </div>
+
+    {% include "blog/blogs_projects.html" %}
+
+
+<!--<div class="container" style="color:white; padding:100px; background-image:linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),-->
+  <!--url('https://wallpaperaccess.com/full/1154055.jpg');" class="fill">-->
+    <!--<a href="#" class="a-white" style="font-size:30px;">Arduino Binary LED Lights</a>-->
+     <!--<p>January 5, 2020 by Maximilian Jäger</p>-->
+    <!--<small>Arduino | </small><small>C++ | </small>-->
+    <!--<br><br>-->
+
+    <!--<p>Dynamic Arduino Program that couts to maximum Binary Options</p>-->
+<!--</div>-->
+
+
+
+
+    <!--{% for post in posts %}-->
+        <!--<article class="media content-section">-->
+          <!--<img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}">-->
+          <!--<div class="media-body">-->
+            <!--<div class="article-metadata">-->
+              <!--<a class="mr-2" href="{% url 'user-posts' post.author.username %}">{{ post.author }}</a>-->
+              <!--<small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>-->
+            <!--</div>-->
+            <!--<h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>-->
+            <!--<p class="article-content">{{ post.content }}</p>-->
+          <!--</div>-->
+        <!--</article>-->
+    <!--{% endfor %}-->
+    <!--{% if is_paginated %}-->
+
+      <!--{% if page_obj.has_previous %}-->
+        <!--<a class="btn btn-outline-info mb-4" href="?page=1"><<</a>-->
+        <!--<a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}"><</a>-->
+      <!--{% endif %}-->
+
+      <!--{% for num in page_obj.paginator.page_range %}-->
+        <!--{% if page_obj.number == num %}-->
+          <!--<a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>-->
+        <!--{% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}-->
+          <!--<a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>-->
+        <!--{% endif %}-->
+      <!--{% endfor %}-->
+
+      <!--{% if page_obj.has_next %}-->
+        <!--<a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">></a>-->
+        <!--<a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">>></a>-->
+      <!--{% endif %}-->
+
+    <!--{% endif %}-->
+
+
+{% endblock content %}
+
