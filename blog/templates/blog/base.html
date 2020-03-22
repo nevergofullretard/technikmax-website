@@ -26,6 +26,7 @@
     {%else%}
     <title>Max Hunter</title>
     {%endif%}
+    <link rel="icon" href="/static/blog/logo.png">
 
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -64,15 +65,16 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
 
+
 </head>
 <body style="background-color:#f2f2f2;">
 
 
 
-<div class="hero-image">
+<div id="hero-image" class="hero-image" >
 
 
-    <nav id="navbar" class="selfmade-nav">
+    <nav id="navbar" class="selfmade-nav" >
         <div class="nav-container">
             <div class="logo">
                 <a href="{% url 'blog-home' %}">Max Hunter</a>
@@ -81,12 +83,12 @@
             <div id="mainListDiv" class="main_list">
                 <ul class="navlinks">
                     <!--<li><a href="">Blog</a></li>-->
-                    <li><a href="{%url 'blog-home'%}">Home</a></li>
+                    <li><a id="home" href="{%url 'blog-home'%}">Home</a></li>
 
                     {% load types %}
                     {% types %}
-                    <li><a href="{%url 'categories'%}">Themen</a></li>
-                    <li><a href="{%url 'about'%}">About</a></li>
+                    <li><a href="{%url 'categories'%}">Kategorien</a></li>
+                    <li><a href="{%url 'about'%}">Über mich</a></li>
 
 
                     <li>
@@ -195,7 +197,7 @@
 
 
 <footer style="background:#d6d6c2;" class="footer" >
-    <div class="container " >
+    <div class="container" >
         <div class="row justify-content-md-center" style="padding:20px;">
             <div class="col col-lg-2" style="padding-bottom: 20px;">
              <a target="_blank" href="https://twitter.com/maxi_jaeger" class="a-black"><img width="50px" height="auto" src="/static/blog/twitter-icon.png" alt="Twitter icon by Icons8"></a>
@@ -212,27 +214,18 @@
             <div class="col col-lg-2" style="padding-bottom: 20px;">
              <a target="_blank" href="https://www.instagram.com/maxe_jaeger/" class="a-black"><img width="50px" height="auto" src="/static/blog/instagram-icon.png" alt="Instagram icon by Icons8"></a>
             </div>
-        </div>
 
+             <div class="col col-lg-2" >
+                <a  class="a-black" href="{% url 'impressum' %}">Impressum & Datenschutz</a>
+            </div>
 
-        <div class="row justify-content-md-center" style="padding:20px;">
-            <div class="col col-lg-2" style="padding-bottom: 20px;">
-            <a  class="a-black" href="{%url 'about'%}">Über mich</a>
-        </div>
-             <div class="col col-lg-2" style="padding-bottom: 20px;">
-            <a   class="a-black" href="{% url 'kontakt' %}">Kontakt</a>
-        </div>
-            <div class="col col-lg-2" style="padding-bottom: 20px;">
-            <a  class="a-black" href="{% url 'impressum' %}">Impressum & Datenschutz</a>
+            <div class="col col-lg-2" style="display: flex; justify-content: center; align-items: center; ">
+                <a   class="a-black" href="{% url 'kontakt' %}">Kontakt</a>
+            </div>
         </div>
 
 
 
-             <div class="col col-lg-2" style="padding-bottom: 20px;">
-            <a   class="a-black" href="{% url 'login' %}">Login</a>
-        </div>
-
-        </div>
         {% if user.is_authenticated %}
                 <div class="row justify-content-md-center">
 

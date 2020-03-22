@@ -1,7 +1,6 @@
 {% extends "blog/base.html" %}
-{%  load crispy_forms_tags %}
 {% block content %}
-
+{% include "blog/navbar.html" %}
 
 
 
@@ -296,7 +295,7 @@ var availableColleges = [
 
                                     </div>
                                 </div>
-                        {{image|crispy}}
+                        {{image}}
                         </div>
 
 
@@ -306,7 +305,7 @@ var availableColleges = [
 
 
 
-                {{  form|crispy }}
+                {{  form }}
             </fieldset>
             <div class="form-group">
                 <button class="btn btn-outline-info" type="submit">Post</button>

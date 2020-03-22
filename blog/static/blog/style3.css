@@ -399,12 +399,13 @@ body, html {
     margin: 0;
   /* Use "linear-gradient" to add a darken background effect to the image (photographer.jpg). This will make the text easier to read */
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+
   url("/static/blog/coding.jpg");
 
 
 
   /* Set a specific height */
-    height: 10vh;
+    height: 8vh;
 
   /* Position and center the image to scale nicely on all screens */
   background-position: center;
@@ -442,9 +443,9 @@ body, html {
 
 .footer {
   position: relative;
-  margin-top: -200px;
+  margin-top: -180px;
    /*negative value of footer height */
-  height: 200px;
+  height: 180px;
   clear: both;
 
 }
