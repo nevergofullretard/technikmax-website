@@ -83,6 +83,7 @@ class PostDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context['title'] = obj.title
         context['des'] = obj.description
+        context['img'] = obj.background_image.image.url
         keywords = ""
         for cat in obj.categories.all():
             keywords += str(cat) + ", "

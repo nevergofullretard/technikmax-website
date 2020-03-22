@@ -5,8 +5,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-     <link rel="icon" type="image/png" href="/static/blog/logo.png">
-
+    {%if img%}
+        <link rel="icon" href="{{img}}">
+    {%else%}
+        <link rel="icon" href="/static/blog/logo.png">
+    {%endif%}
     {%if des%}
     <meta name="description" content="{{des}}">
     {%else%}
@@ -91,7 +94,7 @@
                     <li><a href="{%url 'about'%}">Über mich</a></li>
 
 
-                    <li>
+
 
 
 
@@ -106,7 +109,7 @@
                         <!--<a class="dropdown-item" href="#">Another action</a>-->
                         <!--<a class="dropdown-item" href="#">Something else here</a>-->
                         <!--</div>-->
-                        </li>
+
 
 
                 </ul>
