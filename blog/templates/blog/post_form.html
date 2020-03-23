@@ -1,5 +1,5 @@
 {% extends "blog/base.html" %}
-
+{% load crispy_forms_tags %}
 {% block content %}
 {% include "blog/navbar.html" %}
 
@@ -16,7 +16,7 @@
 
 
 
-                {{  form }}
+                {{  form|crispy }}
             </fieldset>
             <div class="form-group">
                 <button class="btn btn-outline-info" type="submit">Publish</button>

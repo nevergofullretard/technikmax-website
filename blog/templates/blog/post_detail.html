@@ -2,16 +2,17 @@
 {% block content %}
 {% include "blog/navbar.html" %}
 
-    {%include "blog/detail_template.html"%}
-
-
-    {% if object.author == user %}
+ {% if object.author == user %}
           <div class="container">
             <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'post-update' object.id %}">Update</a>
             <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-delete' object.id %}">Delete</a>
           </div>
       {% endif %}
-      <div style="margin-bottom:10px;" ></div>
+
+    {%include "blog/detail_template.html"%}
+
+
+
 
 
 {% endblock content %}

@@ -1,185 +1,90 @@
+{% include "blog/category_hover.html" %}
 
 
-<!--<article class="article-section" style="margin-left:5%; margin-right:5%;">-->
-    <!--<div class="media-body">-->
-        <!--{% if object.background_image %}-->
-            <!--<div class=" fill" style="padding-bottom: 10px;  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),-->
-                <!--url('{{object.background_image.image.url}}');">-->
-        <!--{% elif object.background_color%}-->
-            <!--<div class="" style="padding-bottom: 10px; background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)), {{object.background_color}};">-->
-
-        <!--{%else%}-->
-                <!--<div class=" base_background" style="padding-bottom: 10px;">-->
-        <!--{% endif %}-->
-                <!--<div class="content-padding">-->
+{%if newest.number > 1%}
+        {%include "blog/next_post.html" %} <!-- das bewirkt dann die kleine Ansicht des Posts -->
+    {%else%}
 
 
-                        <!--<h1 class="article-title" style="color: {{object.font_color}}">{{ object.title }}</h1>-->
-                        <!--<div style="padding: 5px;">-->
-                      <!--<span style="color: {{object.font_color}}">{{ object.date|date:"F d, Y" }}, </span>-->
-                        <!--<small  style="color: {{object.font_color}}">von {{ object.author.first_name }} {{ object.author.last_name }}</small>-->
-                    <!--</div>-->
-            <!--</div>-->
+        <div style="text-decoration: none; margin-top: 20px;">
 
+                    <div style="background-color:white; box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.19); border-radius: 25px 25px 25px 25px; margin-bottom: 5%" >
+                       {% if object.background_image %}
+                            <div class="fill" style="padding:25%;background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+                                url('{{object.background_image.image.url}}');border-radius: 25px 25px 0px 0px; " >
+                            </div>
+                        {%else%}
+                            <div class="fill" style="padding:3%; background-color:{{object.categories.first.section.color}}; border-radius: 25px 25px 0px 0px; " >
+                            </div>
+                        {%endif%}
 
+            <div style="padding-bottom: 10%; padding-right: 10%; padding-left: 10%; padding-top: 5%">
+               <h1 style="margin-bottom: 10px; font-size: 2rem">{{object.title}}</h1>
+                <div class="row">
 
-      <!--</div>-->
-
-
-    <!--{% if object.categories.all|length > 3 %}-->
-        <!--<div style="margin:15px;">-->
-              <!--<div class="row">-->
-                  <!--<div class="col">-->
-                      <!--<div class="row">-->
-                          <!--{% for cat in object.categories.all %}-->
-                            <!--<div class="col category_style" >-->
-                                <!--<a href="{% url 'category-detail' name=cat.name%}" class="a-white">{{cat}}</a>-->
-                            <!--</div>-->
-                        <!--{%endfor%}-->
-                      <!--</div>-->
-
-                  <!--</div>-->
-              <!--</div>-->
-          <!--</div>-->
-
-          <!--{%elif object.categories.all|length > 1 %}-->
-              <!--<div style="margin:15px;">-->
-                  <!--<div class="row">-->
-                      <!--<div class="col">-->
-                          <!--<div class="row">-->
-                              <!--{% for cat in object.categories.all %}-->
-                                <!--<div class="col-4 category_style" >-->
-                                    <!--<a href="{% url 'category-detail' name=cat.name%}" class="a-white">{{cat}}</a>-->
-                                <!--</div>-->
-                            <!--{%endfor%}-->
-                          <!--</div>-->
-
-                      <!--</div>-->
-                  <!--</div>-->
-              <!--</div>-->
-
-              <!--{% else %}-->
-               <!--<div style="margin:15px;">-->
-                  <!--<div class="row">-->
-                      <!--<div class="col">-->
-                          <!--<div class="row">-->
-                              <!--{% for cat in object.categories.all %}-->
-                                <!--<div class="col-4 category_style" >-->
-                                    <!--<a href="{% url 'category-detail' name=cat.name%}" class="a-white">{{cat}}</a>-->
-                                <!--</div>-->
-                            <!--{%endfor%}-->
-                          <!--</div>-->
-
-                      <!--</div>-->
-                  <!--</div>-->
-              <!--</div>-->
-          <!--{% endif %}-->
-
-        <!--<div class="content-padding">-->
-
-             <!--<p style="font-style: italic; font-size:1.2rem; padding-top:12px; padding-bottom:12px;">  {{object.description}}</p>-->
-
-            <!--<p >{{ object.content|safe }}</p>-->
-
-        <!--</div>-->
-
-
-    <!--</div>-->
-
-  <!--</article>-->
-
-
-
-<div style="text-decoration: none; margin-top: 20px;">
-
-            <div style="background-color:white; box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.19); border-radius: 25px 25px 25px 25px; margin-bottom: 5%" >
-               {% if object.background_image %}
-                    <div class="fill" style="padding:25%;background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-                        url('{{object.background_image.image.url}}');border-radius: 25px 25px 0px 0px; " >
-                    </div>
-                {%else%}
-                    <div class="fill" style="padding:3%; background-color:{{object.type.color}}; border-radius: 25px 25px 0px 0px; " >
-                    </div>
-                {%endif%}
-
-    <div style="padding-bottom: 10%; padding-right: 10%; padding-left: 10%; padding-top: 5%">
-       <h1 style="margin-bottom: 10px;">{{object.title}}</h1>
-        {% for cat in object.categories.all %}
-         <a href="{% url 'category-detail' name=cat.name %}">
-            <span style="background-color: #e6e6e6; padding: 8px; border-radius: 5px; font-weight:bold; color:{{cat.section.color}};" >{{cat}}</span>
-         </a>
-          {%endfor%}
-        <div style="padding-top: 10px;">
-            <span style="color: {{object.font_color}}">{{ object.date|date:"d.m.Y" }}, </span>
-             <small  style="color: {{object.font_color}}">von {{ object.author.first_name }} {{ object.author.last_name }}</small>
-        </div>
-
-
-        <div style="padding-top: 20px;">
-            <p style="font-size: 1.2rem; font-weight: bold">{{object.description}}</p>
-       <p >{{ object.content|safe }}</p>
-        </div>
-
-    </div>
-
+                        {% for cat in object.categories.all %}
+                         <a class="category_link" href="{% url 'category-detail' name=cat.name %}">
+                            <span class="category_box" style=" padding: 10px; border-radius: 5px; font-weight:bold; color:{{cat.section.color}};" >{{cat}}</span>
+                         </a>
+                      {%endfor%}
 
                 </div>
-             </div>
 
-<div>
-    {%for sim in suggestions%}
-        {%if sim%}
-            {% if forloop.first %}
+                <div style="padding-top: 10px;">
+                    <span style="color: {{object.font_color}}">{{ object.date|date:"d.m.Y" }}, </span>
+                    <a href="{%url 'about'%}" style="color:black">
+                     <small  style="color: {{object.font_color}}">von {{ object.author.first_name }} {{ object.author.last_name }}</small>
+                    </a>
+                </div>
 
-                <h2 style="text-align:center;">Fortsetzung</h2>
+
+                <div style="padding-top: 20px;">
+                    <p style="font-size: 1.2rem; font-weight: bold">{{object.description}}</p>
+               <p>{{ object.content|safe }}</p>
+                </div>
+
+            </div>
+
+
+                        </div>
+                     </div>
+
+        <div>
+
+{%endif%}
+
+
+
+
+    {%if object.next%}
+         <h2 style="text-align:center;">Fortsetzung</h2>
 
                 <div style="text-align:center; margin-top: 20px;   ">
                     <span class="arrow-down"></span>
                 </div>
+        {%include "blog/next_post.html" %}
 
-                {%for object in sim%}
+    {%endif%}
 
 
-
-                {%endfor%}
-            {%else%}
+    {%if newest%}
             <hr>
-                <h2 style="text-align:center">Ähnliches</h2>
+            {%if newest.number > 1%}
+                <h2 style="text-align:center">Ähnliches zu „{{object.title}}“</h2>
+                <p style="text-align:center; font-size:1.5rem;">(Seite {{newest.number}})</p>
+            {%else%}
 
+                <h2 style="text-align:center">Ähnliches</h2>
+            {%endif%}
                 <div style="text-align:center; margin-top: 20px;   ">
                     <span class="arrow-down"></span>
                 </div>
+        {%for object in newest%}
+            {%include "blog/next_post.html" %}
+        {%endfor%}
 
-            {%endif%}
-            {%for object in sim%}
-            <a href="{% url 'post-detail' pk=object.id name=object.title_tag %}"  style="text-decoration: none;">
+        {%include "blog/pagination_newest.html"%}
+    {%endif%}
 
-                            <div class="article_box" >
-                               {% if object.background_image %}
-                                <div class="fill" style="padding:15%;background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-                url('{{object.background_image.image.url}}');border-radius: 25px 25px 0px 0px;" >
-                                </div>
-                                {%else%}
-                                    <div class="fill" style="padding:3%; background-color:{{object.type.color}}; border-radius: 25px 25px 0px 0px; " >
-                                    </div>
-                                {%endif%}
-
-                                <div class="content_box">
-                                    <h3 style="margin-bottom: 10px; font-size: 2.5rem">{{object.title}}</h3>
-                                    {% for cat in object.categories.all %}
-                                        <span class="category_box" style="color:{{cat.section.color}};" >{{cat}}</span>
-
-                                      {%endfor%}
-
-
-                                </div>
-
-
-                                            </div>
-                                         </a>
-    {%endfor%}
-
-        {%endif%}
-    {%endfor%}
 
 </div>

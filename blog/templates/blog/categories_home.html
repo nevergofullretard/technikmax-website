@@ -3,23 +3,15 @@
 
 {% block content %}
 {% include "blog/navbar.html" %}
+{% include "blog/category_hover.html" %}
+
 
 <style>
-
 
     a:hover h2{
     color:#6699ff;
     }
 
-
-    a:hover span:hover {
-    background-color: #6699ff !important;
-    color: white !important;
-    }
-
-    a:hover {
-    text-decoration:none;
-    }
 
 </style>
 <h1>Kategorien</h1>
@@ -37,12 +29,14 @@
                 <h2 style="margin-bottom: 10px;">{{key}}</h2>
             </a>
 
-            <div style="padding-top: 3%">
+            <div class="row" style="padding-top: 3%">
     {%for c in cat%}
 
-                    <a href="{% url 'category-detail' name=c.name %}">
-                        <span style="background-color: #e6e6e6; padding: 12px; border-radius: 7px; font-weight:bold; color: {{key.color}}" >{{c}}</span>
+                     <a class="category_link" href="{% url 'category-detail' name=c.name %}">
+                        <span class="category_box" style="padding: 12px; border-radius: 10px; font-weight:bold; color: {{key.color}}; font-size: 1.2rem" >{{c}}</span>
                     </a>
+
+
 
 
             <!--<div class="col-sm-12 category_box" style="color:{{key.color}}">-->

@@ -6,7 +6,7 @@ from . import models
 class UploadImageForm(forms.ModelForm):
     class Meta:
         model = models.Images
-        fields = ['name', 'image']
+        fields = ['name', 'image', 'description']
 
 
 class PostForm(forms.ModelForm):

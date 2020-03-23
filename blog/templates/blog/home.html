@@ -1,7 +1,9 @@
 {% extends "blog/base.html" %}
-{% include "blog/navbar.html" %}
+
 
 {% block herotext %}
+
+{% include "blog/category_hover.html" %}
 
 <style>
     .hero-image{
@@ -43,11 +45,15 @@ $( "#navbar" ).removeClass( "navbar-background" )
     <span style="font-size:1.6rem; ">{{des}}</span>
     <hr style="margin-bottom: 5%; margin-top: 5%;">
     <p style="font-size:1.5rem; ">Heiße Topics</p>
-    {%for topic in topics%}
-     <a href="{% url 'category-detail' name=topic.name %}">
-        <span class="category_box" style="background-color:#d9d9d9 ;color:{{topic.section.color}}; font-size: 1.2rem" >{{topic}}</span>
+
+    <div class="row" style="justify-content: center; align-items: center;">
+         {%for topic in topics%}
+     <a class="category_link" href="{% url 'category-detail' name=topic.name %}">
+        <span class="category_box" style="background-color:#e6e6e6 ;color:{{topic.section.color}}; font-size: 1.2rem" >{{topic}}</span>
      </a>
     {%endfor%}
+    </div>
+
 
     <hr style="margin-top: 5%; margin-bottom: 5%;">
     <div style="font-size: 1.5rem;">
@@ -78,6 +84,12 @@ $( "#navbar" ).removeClass( "navbar-background" )
             {%endfor%}
 
         {%endif%}
+
+        {% if is_paginated %}
+            {%if page_obj.number != 1%}
+                <span>(Seite {{page_obj.number}})</span>
+            {%endif%}
+        {%endif%}
         </div>
 
 
@@ -91,6 +103,11 @@ $( "#navbar" ).removeClass( "navbar-background" )
     </div>
 
     {% include "blog/blogs_projects.html" %}
+
+
+    {% include "blog/pagination.html" %}
+
+
 
 
 <!--<div class="container" style="color:white; padding:100px; background-image:linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),-->

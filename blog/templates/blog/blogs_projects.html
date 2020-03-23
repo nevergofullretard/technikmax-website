@@ -5,20 +5,28 @@
 
             <div class="article_box" >
            {% if object.background_image %}
-                <div class="fill background_image" style="background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),url('{{object.background_image.image.url}}')" >
+                <div class="fill background_image" style="background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),url('{{object.background_image.image.url}}')" >
                 </div>
             {%else%}
 
-                <div class="fill" style="padding:3%; background-color:{{object.type.color}}; border-radius: 25px 25px 0px 0px; " >
+                <div class="fill" style="padding:3%; background-color:{{object.categories.first.section.color}}; border-radius: 25px 25px 0px 0px; " >
                 </div>
             {%endif%}
 
     <div class="content_box">
-        <h2 style="margin-bottom: 10px; font-size: 2.5rem">{{object.title}}</h2>
-        {% for cat in object.categories.all %}
-            <span class="category_box" style="color:{{cat.section.color}};" >{{cat}}</span>
+        <h2 style="margin-bottom: 10px; font-size: 2rem">{{object.title}}</h2>
 
-          {%endfor%}
+        <div class="row">
+
+                {% for cat in object.categories.all %}
+                 <span class="category_link">
+                    <span class="category_box" style=" padding: 10px; border-radius: 5px; font-weight:bold; color:{{cat.section.color}};" >{{cat}}</span>
+                 </span>
+              {%endfor%}
+
+        </div>
+
+
 
         <div style="padding-top: 20px;">
             <p style="font-size: 1.2rem">{{object.description}}</p>

@@ -56,7 +56,7 @@ var content = $("textarea[name=content]");
 
 
      $("#link").click(function(){
-        content.insertAtCaret('<a href=""></a>')
+        content.insertAtCaret('<a target="_blank" href=""></a>')
     });
 
      $("#bold").click(function(){
@@ -108,7 +108,7 @@ var content = $("textarea[name=content]");
     });
 
     $("#p").click(function(){
-        content.insertAtCaret("<p></p>")
+        content.insertAtCaret("<p style="line-height: 180%; font-size:1.2rem"></p>")
     });
     $("#span").click(function(){
         content.insertAtCaret("<span></span>")

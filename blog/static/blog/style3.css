@@ -471,8 +471,11 @@ border-radius:10px;
 padding:5px;
 margin:5px;
 text-align:center;
-font-weight:500;
+font-weight:bold;
 }
+
+
+
 
 .base_background{
 background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.4)), #6666ff;
@@ -504,6 +507,13 @@ background-color: #f2f2f2;
 padding: 8px;
 border-radius: 5px;
 font-weight:bold;
+}
+
+.category_link {
+margin-top: 12px;
+margin-bottom: 12px;
+margin-left: 5px;
+margin-right: 5px
 }
 
 .dropbtn {

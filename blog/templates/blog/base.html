@@ -41,16 +41,7 @@
 
     <link rel="stylesheet" type="text/css" href="{% static 'blog/style3.css' %}">
 
-    <style>
-    a:hover {
-    text-decoration:none;
-    }
 
-    a:hover span:hover {
-    background-color: #6699ff !important;
-    color: white !important;
-    }
-</style>
 
     <!--OLD JAVASCRIPT BEFORE TRANSITION-->
 <!-- Jquery needed -->
@@ -223,7 +214,7 @@
                 <a  class="a-black" href="{% url 'impressum' %}">Impressum & Datenschutz</a>
             </div>
 
-            <div class="col col-lg-2" style="display: flex; justify-content: center; align-items: center; ">
+            <div class="col col-lg-2" style="display: flex; "> <!-- justify-content: center; align-items: center; : Für mittig im div!-->
                 <a   class="a-black" href="{% url 'kontakt' %}">Kontakt</a>
             </div>
         </div>
