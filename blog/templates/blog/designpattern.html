@@ -40,6 +40,7 @@ $('small[name ="images"]').click(function() {
 });
 
 var content = $("textarea[name=content]");
+console.log(content);
 
 
 
@@ -108,7 +109,7 @@ var content = $("textarea[name=content]");
     });
 
     $("#p").click(function(){
-        content.insertAtCaret("<p style="line-height: 180%; font-size:1.2rem"></p>")
+        content.insertAtCaret("<p style='line-height: 180%; font-size:1.2rem'></p>")
     });
     $("#span").click(function(){
         content.insertAtCaret("<span></span>")
