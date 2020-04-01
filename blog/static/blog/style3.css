@@ -585,16 +585,17 @@ width: 80em;
 
 
 .spinner-stage {
-    text-align: center;
-   position: absolute;
-   left:50%;
-  transform: translate(-50%, -130%);
+    left:0;
+  right:0;
+
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .spinner div {
     position: absolute;
-    width: 300px;
-    height: 300px;
+    width: 260px;
+    height: 260px;
     border: 1px solid black;
     background-image: url(/static/blog/macbook.jpg);
     overflow: hidden;
@@ -604,40 +605,40 @@ width: 80em;
     font-size: 2rem;
     box-shadow: inset 0 0 20px rgba(0,0,0,0.2);
     text-align: center;
-    line-height: 300px;
+    line-height: 260px;
      margin-left: auto;
     margin-right: auto
 }
 
 .spinner .face1 {
-    -webkit-transform: translateZ(150px);
-    -ms-transform: translateZ(150px);
-    transform: translateZ(150px);
+    -webkit-transform: translateZ(130px);
+    -ms-transform: translateZ(130px);
+    transform: translateZ(130px);
 }
 .spinner .face2 {
-    -webkit-transform: rotateY(90deg) translateZ(150px);
-    -ms-transform: rotateY(90deg) translateZ(150px);
-    transform: rotateY(90deg) translateZ(150px);
+    -webkit-transform: rotateY(90deg) translateZ(130px);
+    -ms-transform: rotateY(90deg) translateZ(130px);
+    transform: rotateY(90deg) translateZ(130px);
 }
 .spinner .face3 {
-    -webkit-transform: rotateY(90deg) rotateX(90deg) translateZ(150px);
-    -ms-transform: rotateY(90deg) rotateX(90deg) translateZ(150px);
-    transform: rotateY(90deg) rotateX(90deg) translateZ(150px);
+    -webkit-transform: rotateY(90deg) rotateX(90deg) translateZ(130px);
+    -ms-transform: rotateY(90deg) rotateX(90deg) translateZ(130px);
+    transform: rotateY(90deg) rotateX(90deg) translateZ(130px);
 }
 .spinner .face4 {
-    -webkit-transform: rotateY(180deg) rotateZ(90deg) translateZ(150px);
-    -ms-transform: rotateY(180deg) rotateZ(90deg) translateZ(150px);
-    transform: rotateY(180deg) rotateZ(90deg) translateZ(150px);
+    -webkit-transform: rotateY(180deg) rotateZ(90deg) translateZ(130px);
+    -ms-transform: rotateY(180deg) rotateZ(90deg) translateZ(130px);
+    transform: rotateY(180deg) rotateZ(90deg) translateZ(130px);
 }
 .spinner .face5 {
-    -webkit-transform: rotateY(-90deg) rotateZ(90deg) translateZ(150px);
-    -ms-transform: rotateY(-90deg) rotateZ(90deg) translateZ(150px);
-    transform: rotateY(-90deg) rotateZ(90deg) translateZ(150px);
+    -webkit-transform: rotateY(-90deg) rotateZ(90deg) translateZ(130px);
+    -ms-transform: rotateY(-90deg) rotateZ(90deg) translateZ(130px);
+    transform: rotateY(-90deg) rotateZ(90deg) translateZ(130px);
 }
 .spinner .face6 {
-    -webkit-transform: rotateX(-90deg) translateZ(150px);
-    -ms-transform: rotateX(-90deg) translateZ(150px);
-    transform: rotateX(-90deg) translateZ(150px);
+    -webkit-transform: rotateX(-90deg) translateZ(130px);
+    -ms-transform: rotateX(-90deg) translateZ(130px);
+    transform: rotateX(-90deg) translateZ(130px);
 }
 
 .spinner {
@@ -646,9 +647,9 @@ width: 80em;
     -webkit-transform-style: preserve-3d;
     -ms-transform-style: preserve-3d;
     transform-style: preserve-3d;
-    -webkit-transform-origin: 150px 150px 0;
-    -ms-transform-origin: 150px 150px 0;
-    transform-origin: 150px 150px 0;
+    -webkit-transform-origin: 130px 130px 0;
+    -ms-transform-origin: 130px 130px 0;
+    transform-origin: 130px 130px 0;
 }
 
 @-webkit-keyframes spincube {

@@ -44,11 +44,7 @@ $( "#navbar" ).removeClass( "navbar-background" )
 
     <div id="hero-text" class="hero-text">
         <h1 style="color:white; font-stretch:expanded ">{{title}}</h1>
-        {% if is_paginated %}
-            {%if page_obj.number == 1%}
-                <span style="font-size:2rem; ">über</span>
-            {%endif%}
-        {%endif%}
+
     </div>
 
 
@@ -61,12 +57,14 @@ $( "#navbar" ).removeClass( "navbar-background" )
 {% if is_paginated %}
         {%if page_obj.number == 1%}
 
+<div style="margin-bottom: 8%">
+    <span style="font-size:2rem;" >Infos, Tipps & Tricks zu ...</span>
+</div>
 
 
 
 
-
-      <div class="spinner-stage" id="stage" style="width: 300px; height: 300px;">
+      <div class="spinner-stage" id="stage" style="width: 260px; height: 260px;">
         <div class="spinner">
             <div class="face1">Software</div>
             <div class="face2">Hardware</div>
@@ -77,15 +75,10 @@ $( "#navbar" ).removeClass( "navbar-background" )
         </div>
     </div>
 
+<div>
 
-
-
-
-
-
-
-
-    <p style="font-size:1.8rem; margin-top: 55% ">{{des}}</p>
+</div>
+    <p style="font-size:1.8rem; margin-top: 15% ">{{des}}</p>
     <hr>
 
     <p style="font-size:1.7rem; margin-top: 10%;">Heiße Themen</p>
@@ -93,7 +86,7 @@ $( "#navbar" ).removeClass( "navbar-background" )
     <div id="topics" class="row" style="justify-content: center; align-items: center; margin-bottom: 18%;">
          {%for topic in topics%}
      <a title="Kategorie {{topic.name}} | Technikmax" class="category_link" href="{% url 'category-detail' name=topic.tag_name %}">
-        <span class="category_box" style="padding: 14px; background-color:#e6e6e6 ;color:{{topic.section.color}}; font-size: 1.2rem" >{{topic}}</span>
+        <span class="category_box" style="padding: 10px; background-color:#e6e6e6 ;color:{{topic.section.color}}; font-size: 1.2rem" >{{topic}}</span>
      </a>
     {%endfor%}
     </div>
