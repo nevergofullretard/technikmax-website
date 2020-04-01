@@ -1,7 +1,8 @@
+from django.utils import timezone
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, Http404
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import (
     ListView,
@@ -12,7 +13,7 @@ from django.views.generic import (
 )
 
 
-from .models import Post, Images, Category, Type, Section
+from .models import Post, Images, Category, Type, Section, Texte
 from .forms import UploadImageForm
 
 deutsch = ['Haus', 'Weihnachten', 'Wollen', 'möchten', 'sprechen', 'besuchen']
@@ -24,12 +25,12 @@ def remove_spaces(title):
     title_tag = ''
     for i in range(len(title)):
         letter = title[i].lower()
-        if letter == ' ' or letter == '.' or letter == '/' or letter == '_' or letter == '-':
+        if letter == ' ' or letter == '.' or letter == '/' or letter == '_' or letter == '-' or letter == '?' or letter == '!' or letter =='&' or letter == ':':
             try:
                 last = title[i-1]
                 next = title[i + 1]
                 if next == ' ' or next == '.' or next == '/' or next == '_' or next == '-' \
-                       or last == ' ' or last == '.' or last == '/' or last == '_' or last == '-':
+                       or last == ' ' or last == '.' or last == '/' or last == '_' or last == '-' or letter == '?' or letter == '!' or letter =='&' or letter == ':':
                     pass
 
                 else:
@@ -54,6 +55,7 @@ def remove_spaces(title):
 
 class PostListView(ListView):
     model = Post
+    queryset = Post.objects.filter(published=True)
     template_name = 'blog/home.html' # <app>/<model>_<viewtype>.html in diesem fall blog/post_list.html
     context_object_name = 'newest'
     ordering = ['-date'] # das heißt vom neuesten zum ältesten
@@ -62,10 +64,12 @@ class PostListView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = "Tech-Blog und Projekte"
-        context['des'] = "Interessantes bis hin zu Must-Know über Prorammieren von Hardware sowie Software, Sicherheit im Netz und generell Technik-Themen"
-        context['keywords'] = "Technik, Programming, Programmieren, Projekte, Blog"
+        context['title'] = "Technik Blog und Projekte"
+        context['des'] = "Interessantes bis hin zu Must-Know über  Hardware sowie Software, Sicherheit im Netz und generell Technik-Themen"
+        context['meta_des'] = "Interessantes bis hin zu Must-Know über Prorammieren von Hardware sowie Software, Sicherheit im Netz und generell Technik-Themen"
+        context['keywords'] = "Technik, Programming, Programmieren, Projekte, Blog, Software, Hardware, Internet"
         topics = []
+        context['unpublished'] = Post.objects.filter(published=False)
         posts = Post.objects.all().order_by('-date')
         for post in posts:
             for cat in post.categories.all():
@@ -77,8 +81,19 @@ class PostListView(ListView):
         return context
 
 
-class PostDetailView(DetailView):
+class PostDetailView(UserPassesTestMixin, DetailView):
     model = Post
+
+    def test_func(self):
+        queryset = self.get_queryset()
+        obj = super().get_object(queryset=queryset)
+        if obj.published == False:
+            raise Http404
+        else:
+            return obj
+
+
+
 
 
     def get_context_data(self, queryset=None, **kwargs):
@@ -89,6 +104,7 @@ class PostDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context['title'] = obj.title
         context['des'] = obj.description
+        context['meta_des'] = obj.meta_description
         if obj.background_image:
             context['img'] = str(obj.background_image.image.url)
         keywords = ""
@@ -130,7 +146,7 @@ class PostDetailView(DetailView):
 
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
-    fields = ['content', 'title', 'description', 'date', 'type', 'categories', 'background_image', 'next']
+    fields = ['content', 'title', 'description', 'meta_description', 'date', 'type', 'categories', 'background_image', 'next', 'published']
     template_name = 'blog/post_form.html'
 
     def form_valid(self, form):
@@ -152,13 +168,15 @@ class PostCreateView(LoginRequiredMixin, CreateView):
 
 class PostUpdateView(UpdateView, LoginRequiredMixin):
     model = Post
-    fields = ['content', 'title', 'description', 'date', 'type', 'categories', 'background_image', 'next']
+    fields = ['content', 'title', 'description', 'meta_description', 'date', 'type', 'categories', 'background_image', 'next', 'published']
     template_name = 'blog/post_form.html'
 
 
     def form_valid(self, form):
         form.instance.author = self.request.user
         title = form.instance.title
+        form.instance.last_mod = timezone.now()
+        print(form.instance.last_mod)
 
         form.instance.title_tag = remove_spaces(title)
 
@@ -177,20 +195,21 @@ class PostDeleteView(DeleteView, LoginRequiredMixin):
 
 
 def about(request):
-    return render(request, 'blog/about.html', {'title': 'Über mich'})
+
+    return render(request, 'blog/about.html', {'title': 'Über mich','meta_des': 'Über Technikmax, die Person dahinter und Intentionen', 'content': Texte.objects.get(title="about")})
 
 def kontakt(request):
-    return render(request, 'blog/contact.html', {'title': 'Kontakt'})
+    return render(request, 'blog/contact.html', {'title': 'Kontakt', 'meta_des': 'Technikmax Kontaktmöglichkeiten'})
 
 def impressum(request):
-    return render(request, 'blog/impressum.html', {'title': 'Impressum & Datenschutz'})
+    return render(request, 'blog/impressum.html', {'title': 'Impressum & Datenschutz', 'meta_des': 'Technikmax Impressum & Datenschutz'})
 ''' Projects ab hier'''
 
 
 
 
 def section_detail(request, name):
-    sec = get_object_or_404(Section.objects.all(), name=name)
+    sec = get_object_or_404(Section.objects.all(), tag_name=name)
     cats = Category.objects.filter(section=sec)
 
     posts = []
@@ -201,27 +220,29 @@ def section_detail(request, name):
     paginator = Paginator(posts, 7)
     page = request.GET.get('page')
     newest = paginator.get_page(page)
-
+    meta_des = sec.meta_description
 
     pre = 'Beiträge über '
     title = str(sec.name)
     des = sec.description
     keywords = "Technik, Programming, Programmieren, Projekte, Blog, " + str(sec.name)
-    return render(request, 'blog/category_detail.html', {'cat': sec, 'newest': newest, 'title': title, 'des': des, 'keywords': keywords, 'color': sec.color, 'pre': pre})
+    return render(request, 'blog/category_detail.html', {'meta_des': meta_des, 'cat': sec, 'newest': newest, 'title': title, 'des': des, 'keywords': keywords, 'color': sec.color, 'pre': pre})
 
 def type_detail(request, name):
-    cat = get_object_or_404(Type.objects.all(), name=name)
+    cat = get_object_or_404(Type.objects.all(), tag_name=name)
 
     posts = Post.objects.filter(type__id__in=[cat.id]).order_by('-date')
     paginator = Paginator(posts, 7)
     page = request.GET.get('page')
     newest = paginator.get_page(page)
 
+
     title = "Alle " + str(cat.name)
     des = cat.description
     keywords = str(cat.name)
+    meta_des = cat.meta_description
 
-    return render(request, 'blog/category_detail.html', {'cat': cat, 'newest': newest, 'title': title, 'des': des, 'keywords': keywords})
+    return render(request, 'blog/category_detail.html', {'meta_des': meta_des, 'cat': cat, 'newest': newest, 'title': title, 'des': des, 'keywords': keywords})
 
 
 class CategoriesListView(ListView):
@@ -245,7 +266,7 @@ class CategoriesListView(ListView):
         return context
 
 def category_detail(request, name):
-    cat = get_object_or_404(Category.objects.all(), name=name)
+    cat = get_object_or_404(Category.objects.all(), tag_name=name)
 
     posts = Post.objects.filter(categories__id__in=[cat.id]).order_by('-date')
 
@@ -258,7 +279,8 @@ def category_detail(request, name):
     des = cat.description
     keywords = "Technik, Programming, Programmieren, Projekte, Blog, " + str(cat.name)
     color = cat.section.color
-    return render(request, 'blog/category_detail.html', {'newest': newest, 'cat': cat, 'title': title, 'des': des, 'keywords': keywords, 'color': color, 'pre':pre})
+    meta_des = cat.meta_description
+    return render(request, 'blog/category_detail.html', {'meta_des': meta_des, 'newest': newest, 'cat': cat, 'title': title, 'des': des, 'keywords': keywords, 'color': color, 'pre':pre})
 
 
 

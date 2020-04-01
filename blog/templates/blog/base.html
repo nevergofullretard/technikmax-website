@@ -1,21 +1,39 @@
 
 <!DOCTYPE html>
 {% load static %}
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    {%if img%}
-        <link rel="icon" href="{{img}}">
+
+    {%if title%}
+        <meta name="twitter:title" content="{{title}} | Technikmax">
+        <meta name="title" content="{{title}} | Technikmax" /><meta property="og:title" content="{{title}} | Technikmax" />
+        <title>{{title}} | Technikmax</title>
     {%else%}
-        <link rel="icon" href="/static/blog/logo.png">
+        <title>Technikmax</title>
     {%endif%}
 
-    {%if des%}
-    <meta name="description" content="{{des}}">
+    <meta name="type" content="article" /><meta property="og:type" content="article" /> <!-- I know thats not exactly right-->
+    <meta name="twitter:card" content="summary">
+
+    {%if meta_des%}
+
+        <meta name="twitter:description" content="{{meta_des}}">
+        <meta name="description" content="{{meta_des}}" /><meta property="og:description" content="{{meta_des}}" />
+
     {%else%}
-    <meta name="description" content="Tech Blog und Projekte">
+        <meta name="description" content="Technik Blog und Projekte" /><meta property="og:description" content="Technik Blog und Projekte" />
     {%endif%}
+
+    {%if img%}
+        <meta name="twitter:image" content="{{img}}">
+        <meta property="og:image" content="{{img}}" />
+    {%endif%}
+    <link rel="icon" type="image/png" href="{% static 'favicon.ico' %}">
+
+    <meta name="site_name" content="Technikmax" /><meta property="og:site_name" content="Technikmax" />
+    <meta name="url" content="{{request.build_absolute_uri}}" /><meta property="og:url" content="{{request.build_absolute_uri}}" />
 
     {%if keywords%}
     <meta name="keywords" content="{{keywords}}">
@@ -25,17 +43,13 @@
 
 
 
-    {%if title%}
-    <title>{{title}} | Max Hunter</title>
-    {%else%}
-    <title>Max Hunter</title>
-    {%endif%}
+
 
 
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-    <link rel="stylesheet" type="text/css" href="{% static 'blog/main.css' %}">
+    <!--<link rel="stylesheet" type="text/css" href="{% static 'blog/main.css' %}">-->
 
 
 
@@ -52,11 +66,11 @@
 
 <!-- Optional JavaScript -->
      <!--jQuery first, then Popper.js, then Bootstrap JS-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>-->
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
 
@@ -72,19 +86,21 @@
     <nav id="navbar" class="selfmade-nav" >
         <div class="nav-container">
             <div class="logo">
-                <a href="{% url 'blog-home' %}"><img src="/static/blog/logo.png" width="60px" height="auto" >Max Hunter</a>
+                <a title="Startseite" href="{% url 'blog-home' %}"><img alt="Technikmax Logo" src="{% static 'favicon.ico' %}" width="60px" height="auto" >Technikmax</a>
 
             </div>
 
             <div id="mainListDiv" class="main_list">
                 <ul class="navlinks">
                     <!--<li><a href="">Blog</a></li>-->
-                    <li><a id="home" href="{%url 'blog-home'%}">Home</a></li>
+                    <li><a title="Startseite " id="home" href="{%url 'blog-home'%}">Home</a></li>
 
                     {% load types %}
                     {% types %}
-                    <li><a href="{%url 'categories'%}">Kategorien</a></li>
-                    <li><a href="{%url 'about'%}">Über mich</a></li>
+                    <li><a title="Kategorien " href="{%url 'categories'%}" style="background: -webkit-radial-gradient(#ff6600, #ff5050);
+                     -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Kategorien</a></li>
+                    <li><a title="Über Technikmax" href="{%url 'about'%}" style="background: -webkit-radial-gradient(#cc66ff, #3399ff);
+                     -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Über mich</a></li>
 
 
 
@@ -196,27 +212,27 @@
     <div class="container" >
         <div class="row justify-content-md-center" style="padding:20px;">
             <div class="col col-lg-2" style="padding-bottom: 20px;">
-             <a target="_blank" href="https://twitter.com/maxi_jaeger" class="a-black"><img width="50px" height="auto" src="/static/blog/twitter-icon.png" alt="Twitter icon by Icons8"></a>
+             <a title="Twitter-Account | Technikmax" target="_blank" href="https://twitter.com/maxi_jaeger" class="a-black"><img width="50px" height="auto" src="/static/blog/twitter-icon.png" alt="Twitter icon by Icons8"></a>
             </div>
 
              <div class="col col-lg-2" style="padding-bottom: 20px;">
-             <a target="_blank" href="https://github.com/nevergofullretard" class="a-black"><img width="50px" height="auto" src="/static/blog/github-icon.png" alt="GitHub icon by Icons8"></a>
+             <a title="Github-Account | Technikmax" target="_blank" href="https://github.com/nevergofullretard" class="a-black"><img width="50px" height="auto" src="/static/blog/github-icon.png" alt="GitHub icon by Icons8"></a>
             </div>
 
             <div class="col col-lg-2" style="padding-bottom: 20px;">
-             <a target="_blank" href="https://facebook.com/maximilian.jager.165" class="a-black"><img width="50px" height="auto" src="/static/blog/facebook-icon.png" alt="Facebook icon by Icons8"></a>
+             <a title="Technikmax auf Facebook" target="_blank" href="https://facebook.com/maximilian.jager.165" class="a-black"><img width="50px" height="auto" src="/static/blog/facebook-icon.png" alt="Facebook icon by Icons8"></a>
             </div>
 
             <div class="col col-lg-2" style="padding-bottom: 20px;">
-             <a target="_blank" href="https://www.instagram.com/maxe_jaeger/" class="a-black"><img width="50px" height="auto" src="/static/blog/instagram-icon.png" alt="Instagram icon by Icons8"></a>
+             <a title="Instagram-Account | Technikmax" target="_blank" href="https://www.instagram.com/maxe_jaeger/" class="a-black"><img width="50px" height="auto" src="/static/blog/instagram-icon.png" alt="Instagram icon by Icons8"></a>
             </div>
 
              <div class="col col-lg-2" >
-                <a  class="a-black" href="{% url 'impressum' %}">Impressum & Datenschutz</a>
+                <a title="Impressum & Datenschutz | Technikmax" class="a-black" href="{% url 'impressum' %}">Impressum & Datenschutz</a>
             </div>
 
-            <div class="col col-lg-2" style="display: flex; "> <!-- justify-content: center; align-items: center; : Für mittig im div!-->
-                <a   class="a-black" href="{% url 'kontakt' %}">Kontakt</a>
+            <div class="col col-lg-2" style="display: flex; justify-content: center; align-items: center; ">
+                <a title="Kontakt | Technikmax"  class="a-black" href="{% url 'kontakt' %}">Kontakt</a>
             </div>
         </div>
 

@@ -17,7 +17,15 @@ class Images(models.Model):
     def save(self, *args, **kwargs):
         super(Images, self).save(*args, **kwargs)
         img = Image.open(self.image.path)
+
+        if img.height > 1484 and img.width > 1980:
+            output_size = (1980, 1484)
+            img.thumbnail(output_size)
         img.save(self.image.path)
+
+
+
+
 
 
 
@@ -26,33 +34,48 @@ class Images(models.Model):
 class Section(models.Model): # zB "Software", "Hardware"
     name = models.CharField(blank=False, max_length=30, unique=True)
     color = models.CharField(blank=False, max_length=50)
-    description = models.CharField(blank=True, max_length=500)
+    description = models.TextField(blank=True)
+    meta_description = models.CharField(blank=True, max_length=159)
+    tag_name = models.CharField(blank=True, max_length=35, unique=True)
 
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self, ):
+        return reverse('sections', kwargs={'name': self.tag_name})
 
 class Category(models.Model):  # zB "Python" oder "Arduino"
     name = models.CharField(max_length=100, unique=True)
-    description = models.CharField(blank=True, max_length=500)
+    description = models.TextField(blank=True)
     section = models.ForeignKey(Section, null=True, on_delete=models.CASCADE)
+    meta_description = models.CharField(blank=True, max_length=159)
+    tag_name = models.CharField(blank=True, max_length=110, unique=True)
 
     def __str__(self):
         return f'{self.name}'
 
+    def get_absolute_url(self, ):
+        return reverse('category-detail', kwargs={'name': self.tag_name})
+
 class Type(models.Model): # zB "Projekt" oder "Artikel"
     name = models.CharField(blank=False, max_length=30, unique=True)
     color = models.CharField(blank=False, max_length=50, default='#0033cc')
-    description = models.CharField(blank=True, max_length=500)
+    description = models.TextField(blank=True)
+    meta_description = models.CharField(blank=True, max_length=159)
+    tag_name = models.CharField(blank=True, max_length=35, unique=True)
+
 
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self, ):
+        return reverse('types', kwargs={'name': self.tag_name})
 
 class Post(models.Model):
-    title = models.CharField(blank=False, max_length=100)
+    title = models.CharField(blank=False, max_length=62)
     title_tag = models.CharField(blank=False, max_length=100)
-    description = models.CharField(blank=False, max_length=1000)
+    description = models.TextField(blank=False)
+    meta_description = models.CharField(blank=True, max_length=159)
     type = models.ForeignKey(Type, null=True, on_delete=models.CASCADE)
     categories = models.ManyToManyField(Category, related_name='post_categories')
     background_image = models.ForeignKey(Images, null=True, blank=True, on_delete=True)
@@ -60,7 +83,8 @@ class Post(models.Model):
     author = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
     content = models.TextField(blank=True)
     next = models.ForeignKey('self', blank=True, null=True, on_delete=models.SET_NULL)
-
+    published = models.BooleanField(default=False)
+    last_mod = models.DateTimeField(default=timezone.now)
 
 
 
@@ -98,4 +122,9 @@ class Project(models.Model):
         return reverse('project-detail', kwargs={'pk': self.pk, 'name': self.title_tag})
 
 
+class Texte(models.Model):
+    title = models.CharField(blank=False, max_length=100, unique=True)
+    content = models.TextField(blank=True) # this is with html content
 
+    def __str__(self):
+        return self.title

@@ -3,17 +3,24 @@
 
 {% block herotext %}
 
-{% include "blog/category_hover.html" %}
+
 
 <style>
     .hero-image{
     height:100vh;
     }
 
+   a:hover {
+    text-decoration:none;
+    }
 
+    #topics  span:hover {
+    background-color: #6699ff !important;
+    color: white !important;
+    }
 </style>
 
-<script>
+<script type="text/javascript">
 $( "#navbar" ).removeClass( "navbar-background" )
 
 
@@ -30,33 +37,72 @@ $( "#navbar" ).removeClass( "navbar-background" )
 
 
 
+
 </script>
 
 
 
-    <h1 id="hero-text" class="hero-text" style="color:white; font-stretch:expanded ">{{title}}</h1>
+    <div id="hero-text" class="hero-text">
+        <h1 style="color:white; font-stretch:expanded ">{{title}}</h1>
+        {% if is_paginated %}
+            {%if page_obj.number == 1%}
+                <span style="font-size:2rem; ">über</span>
+            {%endif%}
+        {%endif%}
+    </div>
+
 
 {% endblock herotext%}
 
 {% block content %}
 
-
 <div style="margin-top: 5%; text-align:center;">
-    <span style="font-size:1.6rem; ">{{des}}</span>
-    <hr style="margin-bottom: 5%; margin-top: 5%;">
-    <p style="font-size:1.5rem; ">Heiße Topics</p>
 
-    <div class="row" style="justify-content: center; align-items: center;">
+{% if is_paginated %}
+        {%if page_obj.number == 1%}
+
+
+
+
+
+
+      <div class="spinner-stage" id="stage" style="width: 360px; height: 360px;">
+        <div class="spinner">
+            <div class="face1">Software</div>
+            <div class="face2">Hardware</div>
+            <div class="face3">Internet</div>
+            <div class="face4">Datenschutz</div>
+            <div class="face5">Social Media</div>
+            <div class="face6">Lifehacks</div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+    <p style="font-size:1.8rem; margin-top: 55% ">{{des}}</p>
+    <hr>
+
+    <p style="font-size:1.7rem; margin-top: 10%;">Heiße Themen</p>
+
+    <div id="topics" class="row" style="justify-content: center; align-items: center; margin-bottom: 18%;">
          {%for topic in topics%}
-     <a class="category_link" href="{% url 'category-detail' name=topic.name %}">
-        <span class="category_box" style="background-color:#e6e6e6 ;color:{{topic.section.color}}; font-size: 1.2rem" >{{topic}}</span>
+     <a title="Kategorie {{topic.name}} | Technikmax" class="category_link" href="{% url 'category-detail' name=topic.tag_name %}">
+        <span class="category_box" style="padding: 14px; background-color:#e6e6e6 ;color:{{topic.section.color}}; font-size: 1.2rem" >{{topic}}</span>
      </a>
     {%endfor%}
     </div>
 
 
     <hr style="margin-top: 5%; margin-bottom: 5%;">
-    <div style="font-size: 1.5rem;">
+        {%endif%}
+{%endif%}
+    <div style="font-size: 1.8rem;">
     <span > Neueste </span>
 
         {%if types|length < 2%}
@@ -98,6 +144,8 @@ $( "#navbar" ).removeClass( "navbar-background" )
 
 </div>
 
+
+
     <div style="text-align:center; margin-top: 20px;   ">
         <span class="arrow-down"></span>
     </div>
@@ -107,56 +155,17 @@ $( "#navbar" ).removeClass( "navbar-background" )
 
     {% include "blog/pagination.html" %}
 
+{% if user.is_authenticated %}
+<hr>
+<h3>Noch nicht veröffentlicht:</h3>
+    {%for obj in unpublished%}
+    <p>{{obj.title}} - <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'post-update' obj.id %}">Bearbeiten</a></p>
+    {%endfor%}
 
+<hr>
 
+{%endif%}
 
-<!--<div class="container" style="color:white; padding:100px; background-image:linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),-->
-  <!--url('https://wallpaperaccess.com/full/1154055.jpg');" class="fill">-->
-    <!--<a href="#" class="a-white" style="font-size:30px;">Arduino Binary LED Lights</a>-->
-     <!--<p>January 5, 2020 by Maximilian Jäger</p>-->
-    <!--<small>Arduino | </small><small>C++ | </small>-->
-    <!--<br><br>-->
-
-    <!--<p>Dynamic Arduino Program that couts to maximum Binary Options</p>-->
-<!--</div>-->
-
-
-
-
-    <!--{% for post in posts %}-->
-        <!--<article class="media content-section">-->
-          <!--<img class="rounded-circle article-img" src="{{ post.author.profile.image.url }}">-->
-          <!--<div class="media-body">-->
-            <!--<div class="article-metadata">-->
-              <!--<a class="mr-2" href="{% url 'user-posts' post.author.username %}">{{ post.author }}</a>-->
-              <!--<small class="text-muted">{{ post.date_posted|date:"F d, Y" }}</small>-->
-            <!--</div>-->
-            <!--<h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>-->
-            <!--<p class="article-content">{{ post.content }}</p>-->
-          <!--</div>-->
-        <!--</article>-->
-    <!--{% endfor %}-->
-    <!--{% if is_paginated %}-->
-
-      <!--{% if page_obj.has_previous %}-->
-        <!--<a class="btn btn-outline-info mb-4" href="?page=1"><<</a>-->
-        <!--<a class="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}"><</a>-->
-      <!--{% endif %}-->
-
-      <!--{% for num in page_obj.paginator.page_range %}-->
-        <!--{% if page_obj.number == num %}-->
-          <!--<a class="btn btn-info mb-4" href="?page={{ num }}">{{ num }}</a>-->
-        <!--{% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}-->
-          <!--<a class="btn btn-outline-info mb-4" href="?page={{ num }}">{{ num }}</a>-->
-        <!--{% endif %}-->
-      <!--{% endfor %}-->
-
-      <!--{% if page_obj.has_next %}-->
-        <!--<a class="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}">></a>-->
-        <!--<a class="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}">>></a>-->
-      <!--{% endif %}-->
-
-    <!--{% endif %}-->
 
 
 {% endblock content %}

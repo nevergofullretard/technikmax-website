@@ -1,7 +1,7 @@
 {%for object in newest%}
 
 
-             <a href="{% url 'post-detail' pk=object.id name=object.title_tag %}"  style="text-decoration: none;">
+             <a title='{{object.type}} "{{object.title}}" | Technikmax' href="{% url 'post-detail' pk=object.id name=object.title_tag %}"  style="text-decoration: none;">
 
             <div class="article_box" >
            {% if object.background_image %}
@@ -38,4 +38,6 @@
 
                 </div>
              </a>
+
+
 {%endfor%}

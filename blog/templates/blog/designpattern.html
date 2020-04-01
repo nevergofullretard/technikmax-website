@@ -35,7 +35,7 @@ console.log( $('small[name ="images"]')  )
 
 $('small[name ="images"]').click(function() {
     console.log( $(this).attr('id') )
-    content.insertAtCaret('<img src="'+ $(this).attr('id') + '" width="100%" height="" class="fill">')
+    content.insertAtCaret('<img src="'+ $(this).attr('id') + '" alt="' + $(this).attr('alt-text') + '" width="100%" height="" class="fill">')
 
 });
 
@@ -57,7 +57,11 @@ console.log(content);
 
 
      $("#link").click(function(){
-        content.insertAtCaret('<a target="_blank" href=""></a>')
+        content.insertAtCaret('<a title="" target="_blank" href=""></a>')
+    });
+
+    $("#iframe").click(function(){
+        content.insertAtCaret('<iframe src="" width="100%" height="600px" name="" title=""></iframe>')
     });
 
      $("#bold").click(function(){
@@ -210,8 +214,10 @@ console.log(content);
                             <span id="link" class="border border-dark rounded"> link </span>
                             <span id="bold" class="border border-dark rounded"><b> B </b></span>
                             <span id="italic" class="border border-dark rounded"><i> Italic </i></span><br>
+                            <span id="iframe" class="border border-dark rounded"><i> iFrame einfügen </i></span><br>
                             <a href="https://www.w3schools.com/colors/colors_picker.asp" target="_blank">Color picker</a><br>
                             <a href="https://www.w3schools.com/cssref/default.asp" target="_blank">CSS Reference</a>
+
                         </div>
 
 
@@ -286,10 +292,12 @@ console.log(content);
                                   <button class="btn btn-info dropdown-toggle" type="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Bild einfügen
                                   </button>
-                                   <div class="dropdown-menu">
+                                   <div class="dropdown-menu" style="height:200px; overflow-y:auto;">
                                        {% for image in images_query%}
-                                       <small class="dropdown-item" name="images" id="{{image.image.url}}">{{image.name}}</small>
-                                       <img class="rounded-circle account-img" src="{{ image.image.url }}" alt="{{image.name}}">
+
+                                       <img align="left" style=" border-radius: 50%;" width="100px" height="100px" src="{{ image.image.url }}" alt="{{image.name}}">
+                                       <small class="dropdown-item" name="images" id="{{image.image.url}}" alt-text="{{image.name}}">{{image.name}}</small>
+
                                        <hr>
 
                                         {%endfor%}

@@ -2,7 +2,7 @@
 {% block content %}
 {% include "blog/navbar.html" %}
 
- {% if object.author == user %}
+    {% if user.is_authenticated %}
           <div class="container">
             <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'post-update' object.id %}">Update</a>
             <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-delete' object.id %}">Delete</a>

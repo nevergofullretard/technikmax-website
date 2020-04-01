@@ -25,29 +25,20 @@
     </div>
 
         <div style="padding-bottom: 10%; padding-right: 10%; padding-left: 10%; padding-top: 5%">
-            <a href="{% url 'sections' name=key.name %}">
+            <a title="Bereich {{key.name}}" href="{% url 'sections' name=key.tag_name %}">
                 <h2 style="margin-bottom: 10px;">{{key}}</h2>
             </a>
 
             <div class="row" style="padding-top: 3%">
-    {%for c in cat%}
+            {%for c in cat%}
 
-                     <a class="category_link" href="{% url 'category-detail' name=c.name %}">
+                     <a title="Kategorie {{c.name}}" class="category_link" href="{% url 'category-detail' name=c.tag_name %}">
                         <span class="category_box" style="padding: 12px; border-radius: 10px; font-weight:bold; color: {{key.color}}; font-size: 1.2rem" >{{c}}</span>
                     </a>
 
 
 
-
-            <!--<div class="col-sm-12 category_box" style="color:{{key.color}}">-->
-                <!--<a href="{% url 'category-detail' name=c.name %}">-->
-                    <!--<div class="frontpage_square">-->
-                        <!--<h2 class="hero-text">{{c}}</h2>-->
-                    <!--</div>-->
-                <!--</a>-->
-            <!--</div>-->
-
-    {%endfor%}
+            {%endfor%}
             </div>
         </div>
     </div>
