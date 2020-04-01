@@ -83,7 +83,7 @@ $( "#navbar" ).removeClass( "navbar-background" )
 
     <p style="font-size:1.7rem; margin-top: 10%;">Heiße Themen</p>
 
-    <div id="topics" class="row" style="justify-content: center; align-items: center; margin-bottom: 18%;">
+    <div id="topics" class="row" style="justify-content: center; align-items: center; margin-bottom: 5%;">
          {%for topic in topics%}
      <a title="Kategorie {{topic.name}} | Technikmax" class="category_link" href="{% url 'category-detail' name=topic.tag_name %}">
         <span class="category_box" style="padding: 10px; background-color:#e6e6e6 ;color:{{topic.section.color}}; font-size: 1.2rem" >{{topic}}</span>
