@@ -301,7 +301,6 @@ def upload_image(request):
         request.FILES['image'].name = new_name
 
         if form.is_valid():
-
             form.save()
             messages.success(request, 'Das Bild wurde hochgeladen')
         # else:

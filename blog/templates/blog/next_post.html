@@ -12,11 +12,11 @@ url('{{object.background_image.image.url}}');border-radius: 25px 25px 0px 0px;" 
 
     <div class="content_box">
         <h3 style="margin-bottom: 10px; font-size: 2rem">{{object.title}}</h3>
-        {% for cat in object.categories.all %}
-            <span class="category_box" style="color:{{cat.section.color}};" >{{cat}}</span>
-
+        <div class="row">
+            {% for cat in object.categories.all %}
+                <span class="category_box" style="color:{{cat.section.color}};" >{{cat}}</span>
           {%endfor%}
-
+        </div>
 
     </div>
 

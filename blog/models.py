@@ -1,8 +1,21 @@
+from io import BytesIO
+from django.core.files import File
+
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 from django.urls import reverse
 from PIL import Image
+
+def compress(image):
+    im = Image.open(image)
+    # create a BytesIO object
+    im_io = BytesIO()
+    # save image to BytesIO object
+    im.save(im_io, 'JPEG', quality=75)
+    # create a django-friendly Files object
+    new_image = File(im_io, name=image.name)
+    return new_image
 
 class Images(models.Model):
     name = models.CharField(max_length=100, blank=False)
@@ -14,6 +27,20 @@ class Images(models.Model):
     def __str__(self):
         return f'{self.name}'
 
+    # def save(self, *args, **kwargs):
+    #     super(Images, self).save(*args, **kwargs)
+    #     img = Image.open(self.image.path)
+    #
+    #     if img.height > 1484 and img.width > 1980:
+    #         output_size = (1980, 1484)
+    #         img.thumbnail(output_size)
+    #
+    #     img = compress(img)
+    #
+    #     img.save(self.image.path)
+
+
+
     def save(self, *args, **kwargs):
         super(Images, self).save(*args, **kwargs)
         img = Image.open(self.image.path)
@@ -22,6 +49,12 @@ class Images(models.Model):
             output_size = (1980, 1484)
             img.thumbnail(output_size)
         img.save(self.image.path)
+
+        new_image = compress(self.image)
+        # set self.image to new_image
+        self.image = new_image
+        # save
+        super().save(*args, **kwargs)
 
 
 
@@ -76,9 +109,9 @@ class Post(models.Model):
     title_tag = models.CharField(blank=False, max_length=100)
     description = models.TextField(blank=False)
     meta_description = models.CharField(blank=True, max_length=159)
-    type = models.ForeignKey(Type, null=True, on_delete=models.CASCADE)
+    type = models.ForeignKey(Type, null=True, on_delete=models.SET_NULL)
     categories = models.ManyToManyField(Category, related_name='post_categories')
-    background_image = models.ForeignKey(Images, null=True, blank=True, on_delete=True)
+    background_image = models.ForeignKey(Images, null=True, blank=True, on_delete=models.SET_NULL)
     date = models.DateTimeField(default=timezone.now)
     author = models.ForeignKey(User, null=True, on_delete=models.CASCADE)
     content = models.TextField(blank=True)

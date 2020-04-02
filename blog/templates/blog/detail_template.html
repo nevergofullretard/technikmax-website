@@ -1,5 +1,6 @@
 {% include "blog/category_hover.html" %}
 
+
 <style type="text/css">
 
     #share-buttons img {
@@ -26,11 +27,12 @@ url('{{object.background_image.image.url}}');border-radius: 25px 25px 0px 0px;" 
 
     <div class="content_box">
         <h1 style="margin-bottom: 10px; font-size: 2rem">{{object.title}}</h1>
-        {% for cat in object.categories.all %}
-            <span class="category_box" style="color:{{cat.section.color}};" >{{cat}}</span>
 
-          {%endfor%}
-
+        <div class="row">
+            {% for cat in object.categories.all %}
+                <span class="category_box" style="color:{{cat.section.color}};" >{{cat}}</span>
+              {%endfor%}
+         </div>
 
     </div>
 
@@ -51,38 +53,47 @@ url('{{object.background_image.image.url}}');border-radius: 25px 25px 0px 0px;" 
                             </div>
                         {%endif%}
 
-            <div style="padding-bottom: 10%; padding-right: 10%; padding-left: 10%; padding-top: 5%">
-               <h1 style="margin-bottom: 10px; font-size: 2rem">{{object.title}}</h1>
-                <div class="row">
-                    <div class="col">
+            <div style="padding-bottom: 10%; padding-right: 4%; padding-left: 4%; padding-top: 5%">
 
 
 
-                        {% for cat in object.categories.all %}
-                         <a title="Kategorie {{cat.name}}" class="category_link" href="{% url 'category-detail' name=cat.tag_name %}">
-                            <span class="category_box" style=" padding: 10px; border-radius: 5px; font-weight:bold; color:{{cat.section.color}};" >{{cat}}</span>
-                         </a>
-                      {%endfor%}
+                   <h1 style="margin-bottom: 10px; font-size: 2rem">{{object.title}}</h1>
+                    <div class="row">
+
+
+
+
+                            {% for cat in object.categories.all %}
+                             <a title="Kategorie {{cat.name}}" class="category_link" href="{% url 'category-detail' name=cat.tag_name %}">
+                                <span class="category_box" style=" padding: 10px; border-radius: 5px; font-weight:bold; color:{{cat.section.color}};" >{{cat}}</span>
+                             </a>
+                          {%endfor%}
+
 
 
 
                     </div>
-                </div>
 
 
 
-                <div style="padding-top: 10px;">
-                    <span style="color: {{object.font_color}}">{{ object.date|date:"d.m.Y" }}, </span>
-                    <a href="{%url 'about'%}" style="color:black">
-                     <small  style="color: {{object.font_color}}">von {{ object.author.first_name }} {{ object.author.last_name }}</small>
-                    </a>
-                </div>
+                    <div style="padding-top: 10px;">
+                        <span style="color: {{object.font_color}}">{{ object.date|date:"d.m.Y" }}, </span>
+                        <a href="{%url 'about'%}" style="color:black">
+                         <small  style="color: {{object.font_color}}">von {{ object.author.first_name }} {{ object.author.last_name }}</small>
+                        </a>
+                    </div>
 
 
 
                 <div style="padding-top: 20px;">
                     <p style="font-size: 1.2rem; font-weight: bold">{{object.description}}</p>
-               <p>{{ object.content|safe }}</p>
+
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+                    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+                    <p>{{ object.content|safe }}</p>
+
+
                 </div>
 
             </div>
