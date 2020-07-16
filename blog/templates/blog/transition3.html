@@ -24,7 +24,7 @@ sexy {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgba(0, 0, 0, 0.787);
+
   overflow: hidden;
 }
 
@@ -51,7 +51,7 @@ button:focus {
   width: 100%;
   height: 100%;
   z-index: -5;
-  filter: blur(8px);
+   
   pointer-events: none;
   user-select: none;
   overflow: hidden;
@@ -102,7 +102,7 @@ button:focus {
   height: auto;
 }
 .cardList__btn {
-  --btn-size: 50px;
+  --btn-size: 60px;
   width: var(--btn-size);
   height: var(--btn-size);
   position: absolute;
@@ -111,10 +111,10 @@ button:focus {
   z-index: 100;
 }
 .cardList__btn.btn--left {
-  left: +10%;
+  left: +22%;
 }
 .cardList__btn.btn--right {
-  right: +10%;
+  right: +22%;
 }
 .cardList__btn .icon {
   width: 100%;
@@ -230,7 +230,7 @@ button:focus {
   --mg-left: 40px;
   --text-size-offset: 0.12;
   font-weight: 600;
-  margin-left: var(--mg-left);
+  margin-left:  calc(var(--mg-left) * 3);
   margin-bottom: calc(var(--mg-left) / 2);
   padding-bottom: 0.8rem;
 }
@@ -346,7 +346,8 @@ button:focus {
 		<div class="cards__wrapper">
 			<div class="card current--card">
 				<div class="card__image">
-					<img src="https://images.pexels.com/photos/2582935/pexels-photo-2582935.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="" />
+
+					<img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80" alt="" />
 				</div>
 			</div>
 
@@ -358,7 +359,7 @@ button:focus {
 
 			<div class="card previous--card">
 				<div class="card__image">
-					<img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80" alt="" />
+					<img src="https://images.pexels.com/photos/2582935/pexels-photo-2582935.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="" />
 				</div>
 			</div>
 		</div>
@@ -375,8 +376,8 @@ button:focus {
 	<div class="infoList">
 		<div class="info__wrapper">
 			<div class="info current--info">
-				<h2 class="text name">Hardware</h2>
-				<h4 class="text location">zum Anfassen</h4>
+				<h2 class="text name">Internet</h2>
+				<h4 class="text location">& Social Media</h4>
 				<!--<p class="text description">The mountains are calling</p>-->
 			</div>
 
@@ -387,8 +388,8 @@ button:focus {
 			</div>
 
 			<div class="info previous--info">
-				<h2 class="text name">Internet</h2>
-				<h4 class="text location">& Social Media</h4>
+				<h2 class="text name">Hardware</h2>
+				<h4 class="text location">to touch</h4>
 				<!--<p class="text description">Let your dreams come true</p>-->
 			</div>
 		</div>
@@ -397,13 +398,13 @@ button:focus {
 
 	<div class="app__bg">
 		<div class="app__bg__image current--image">
-			<img src="https://images.pexels.com/photos/2582935/pexels-photo-2582935.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="" />
+			<img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80" alt="" />
 		</div>
 		<div class="app__bg__image next--image">
 			<img src="https://images.unsplash.com/photo-1575089976121-8ed7b2a54265?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80" alt="" />
 		</div>
 		<div class="app__bg__image previous--image">
-			<img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80" alt="" />
+			<img src="https://images.pexels.com/photos/2582935/pexels-photo-2582935.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="" />
 		</div>
 	</div>
 </div>
