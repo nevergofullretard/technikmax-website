@@ -70,7 +70,7 @@
 
 
 </head>
-<body style="background-color:#f2f2f2;">
+<body style="background-color:white;">
 
 
 
@@ -131,9 +131,9 @@
         <!--<img width="100%" src="static/blog/cover.png" alt="Technikmax Logo Cover">-->
 
 
+
+{% block wide-content %}{% endblock %}
 <div class="wrap" style="margin-top: 10px">
-
-
     <div id="base-container" class="container main">
 
 
@@ -152,6 +152,8 @@
                     </div>
                 {% endfor %}
             {% endif %}
+
+
 
             {% block content %}{% endblock %}
 

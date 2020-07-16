@@ -50,32 +50,44 @@ $( "#navbar" ).removeClass( "navbar-background" )
 
 {% endblock herotext%}
 
-{% block content %}
+{% block wide-content %}
+<div style="text-align:center;"> <!--vor den transitions: margin-top: 5% -->
 
-<div style="margin-top: 5%; text-align:center;">
+{% include "blog/transition3.html" %}
+{% include "blog/transition5.html" %}
+
 
 {% if is_paginated %}
         {%if page_obj.number == 1%}
 
-<div style="margin-bottom: 8%">
-    <span style="font-size:2rem;" >Infos, Tipps & Tricks zu ...</span>
-</div>
+
+
+<!--<div style="margin-bottom: 8%">-->
+    <!--<span style="font-size:2rem;" >Infos, Tipps & Tricks zu ...</span>-->
+<!--</div>-->
+
+<div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
 
 
 
-
-      <div class="spinner-stage" id="stage" style="width: 260px; height: 260px;">
-        <div class="spinner">
-            <div class="face1">Software</div>
-            <div class="face2">Hardware</div>
-            <div class="face3">Internet</div>
-            <div class="face4">Datenschutz</div>
-            <div class="face5">Social Media</div>
-            <div class="face6">Lifehacks</div>
-        </div>
-    </div>
+      <!--<div class="spinner-stage" id="stage" style="width: 260px; height: 260px;">-->
+        <!--<div class="spinner">-->
+            <!--<div class="face1">Software</div>-->
+            <!--<div class="face2">Hardware</div>-->
+            <!--<div class="face3">Internet</div>-->
+            <!--<div class="face4">Datenschutz</div>-->
+            <!--<div class="face5">Social Media</div>-->
+            <!--<div class="face6">Lifehacks</div>-->
+        <!--</div>-->
+    <!--</div>-->
 
 <div>
+
 
 </div>
     <p style="font-size:1.8rem; margin-top: 15% ">{{des}}</p>
@@ -139,6 +151,16 @@ $( "#navbar" ).removeClass( "navbar-background" )
 
 
 
+<!-- important: für normal ist das bei base.html gleich nach body! -->
+
+<div id="base-container" class="container main">
+
+
+
+
+
+
+
     <div style="text-align:center; margin-top: 20px;   ">
         <span class="arrow-down"></span>
     </div>
@@ -159,7 +181,7 @@ $( "#navbar" ).removeClass( "navbar-background" )
 
 {%endif%}
 
+</div>
 
-
-{% endblock content %}
+{% endblock wide-content %}
 

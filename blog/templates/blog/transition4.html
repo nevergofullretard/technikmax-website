@@ -1,0 +1,108 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.7.8/jquery.fullPage.css'>
+<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:300,100'>
+
+
+<style>
+    /* Variable definition */
+/* Pen's SCSS */
+dog {
+  background: white url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/86637/sky.jpeg) no-repeat center 0%/cover;
+  -webkit-transition: background-position .3s ease-in-out;
+  transition: background-position .3s ease-in-out;
+}
+body.fp-viewing-0 {
+  background-position: center 0%;
+}
+body.fp-viewing-1 {
+  background-position: center 50%;
+}
+body.fp-viewing-2 {
+  background-position: center 100%;
+}
+
+.one,
+.three {
+  background: linear-gradient(-45deg, transparent 25%, white 25%, white 75%, transparent 75%, transparent 100%);
+}
+
+.two {
+  background: linear-gradient(45deg, transparent 25%, white 25%, white 75%, transparent 75%, transparent 100%);
+  text-align: right;
+}
+
+h1,
+h2 {
+  font-family: 'Roboto', sans-serif;
+  font-size: 58px;
+  max-width: 830px;
+  padding: 0 15px;
+  margin: 0 auto;
+  height: 64px;
+  overflow: hidden;
+  line-height: 3.5;
+  -webkit-transition: line-height 0.85s cubic-bezier(0.77, 0, 0.175, 1);
+  transition: line-height 0.85s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+h1 {
+  font-weight: 100;
+  -webkit-transition-delay: .3s;
+          transition-delay: .3s;
+}
+
+h2 {
+  margin-top: -6px;
+  font-weight: 300;
+  -webkit-transition-delay: .8s;
+          transition-delay: .8s;
+}
+
+.section.active h1,
+.section.active h2 {
+  line-height: 1;
+}
+</style>
+
+
+
+<dog>
+<!-- partial:index.partial.html -->
+<div id="fullpage">
+  <div class="section one">
+    <h1>
+      Here's a great
+    </h1>
+    <h2>
+      tagline to read
+    </h2>
+  </div>
+  <div class="section two">
+    <h1>
+      Oh look, another phrase
+    </h1>
+    <h2>
+      to stand out
+    </h2>
+  </div>
+  <div class="section three">
+    <h1>
+      Finally, this is the
+    </h1>
+    <h2>
+      last slide
+    </h2>
+  </div>
+</div>
+<!-- partial -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/fullPage.js/2.7.8/jquery.fullPage.js'></script><script  src="./script.js"></script>
+
+
+<script>
+    (function() {
+  $('#fullpage').fullpage();
+})();
+</script>
+
+    </dog>
