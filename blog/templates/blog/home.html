@@ -7,7 +7,7 @@
 
 <style>
     .hero-image{
-    height:100vh;
+    height:0vh;
     }
 
    a:hover {
@@ -42,10 +42,10 @@ $( "#navbar" ).removeClass( "navbar-background" )
 
 
 
-    <div id="hero-text" class="hero-text">
-        <h1 style="color:white; font-stretch:expanded ">{{title}}</h1>
+    <!--<div id="hero-text" class="hero-text">-->
+        <!--<h2 style="color:white; font-stretch:expanded, ">{{title}}</h2>-->
 
-    </div>
+    <!--</div>-->
 
 
 {% endblock herotext%}
@@ -56,6 +56,22 @@ $( "#navbar" ).removeClass( "navbar-background" )
 {% include "blog/transition3.html" %}
 {% include "blog/transition5.html" %}
 
+    <style>
+.centered-image{
+
+
+   display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+
+}
+    </style>
+    <!--<img src="https://technikmax.com/static/blog/cover.png" alt="Technikmax Cover" class="centered-image">-->
+
+    <!--<div style="background-color:#E2DFF2; padding-top: 10%">-->
+        <!--<h3>on Facebook</h3>-->
+    <!--</div>-->
 
 {% if is_paginated %}
         {%if page_obj.number == 1%}
@@ -66,12 +82,7 @@ $( "#navbar" ).removeClass( "navbar-background" )
     <!--<span style="font-size:2rem;" >Infos, Tipps & Tricks zu ...</span>-->
 <!--</div>-->
 
-<div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
+
 
 
 
@@ -90,10 +101,10 @@ $( "#navbar" ).removeClass( "navbar-background" )
 
 
 </div>
-    <p style="font-size:1.8rem; margin-top: 15% ">{{des}}</p>
-    <hr>
+    <!--<p style="font-size:1.8rem; margin-top: 15% ">{{des}}</p>-->
+    <!--<hr>-->
 
-    <p style="font-size:1.7rem; margin-top: 10%;">Heiße Themen</p>
+    <p style="font-size:2.5rem; margin-top: 5%;">Heiße Themen</p>
 
     <div id="topics" class="row" style="justify-content: center; align-items: center; margin-bottom: 5%;">
          {%for topic in topics%}
@@ -107,34 +118,36 @@ $( "#navbar" ).removeClass( "navbar-background" )
     <hr style="margin-top: 5%; margin-bottom: 5%;">
         {%endif%}
 {%endif%}
-    <div style="font-size: 1.8rem;">
-    <span > Neueste </span>
+    <div style="font-size: 2.8rem;">
 
-        {%if types|length < 2%}
-            {%for type in types%}
-                <span>{{type}}</span>
-            {%endfor%}
-        {%elif types|length == 2%}
-            {%for type in types%}
-                {%if forloop.last%}
-                    <span>{{type}}</span>
-                {%else%}
-                    <span>{{type}} & </span>
-                {%endif%}
-            {%endfor%}
+        <span>Neue Beiträge</span>
+    <!--<span > Neueste </span>-->
 
-        {%elif types|length > 2%}
-            {%for type in types%}
-                {%if forloop.last%}
-                    <span> & {{type}}</span>
-                {%elif forloop.first%}
-                    <span>{{type}}</span>
-                {%else%}
-                   <span>, {{type}}</span>
-                {%endif%}
-            {%endfor%}
+        <!--{%if types|length < 2%}-->
+            <!--{%for type in types%}-->
+                <!--<span>{{type}}</span>-->
+            <!--{%endfor%}-->
+        <!--{%elif types|length == 2%}-->
+            <!--{%for type in types%}-->
+                <!--{%if forloop.last%}-->
+                    <!--<span>{{type}}</span>-->
+                <!--{%else%}-->
+                    <!--<span>{{type}} & </span>-->
+                <!--{%endif%}-->
+            <!--{%endfor%}-->
 
-        {%endif%}
+        <!--{%elif types|length > 2%}-->
+            <!--{%for type in types%}-->
+                <!--{%if forloop.last%}-->
+                    <!--<span> & {{type}}</span>-->
+                <!--{%elif forloop.first%}-->
+                    <!--<span>{{type}}</span>-->
+                <!--{%else%}-->
+                   <!--<span>, {{type}}</span>-->
+                <!--{%endif%}-->
+            <!--{%endfor%}-->
+
+        <!--{%endif%}-->
 
         {% if is_paginated %}
             {%if page_obj.number != 1%}

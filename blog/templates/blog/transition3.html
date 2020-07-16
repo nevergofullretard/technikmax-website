@@ -12,6 +12,8 @@
   --card-transition-easing: ease;
 }
 
+
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -51,7 +53,7 @@ button:focus {
   width: 100%;
   height: 100%;
   z-index: -5;
-   
+
   pointer-events: none;
   user-select: none;
   overflow: hidden;
@@ -227,19 +229,20 @@ button:focus {
   font-weight: 800;
 }
 .info .location {
-  --mg-left: 40px;
+  --mg-left: 50px;
   --text-size-offset: 0.12;
   font-weight: 600;
-  margin-left:  calc(var(--mg-left) * 3);
+  margin-left:  calc(var(--mg-left) * 2.5);
   margin-bottom: calc(var(--mg-left) / 2);
   padding-bottom: 0.8rem;
+
 }
-.info .location::before, .info .location::after {
-  content: "";
-  position: absolute;
-  background: #fff;
-  left: 0%;
-  transform: translate(calc(-1 * var(--mg-left)), -50%);
+<!--.info .location::before, .info .location::after {-->
+  <!--content: "";-->
+  <!--position: absolute;-->
+  <!--background: #fff;-->
+  <!--left: 0%;-->
+  <!--transform: translate(calc(-1 * var(&#45;&#45;mg-left)), -50%);-->
 }
 .info .location::before {
   top: 50%;
@@ -376,20 +379,20 @@ button:focus {
 	<div class="infoList">
 		<div class="info__wrapper">
 			<div class="info current--info">
-				<h2 class="text name">Internet</h2>
-				<h4 class="text location">& Social Media</h4>
+				<h2 class="text name ">Internet</h2>
+				<h4 class="text location cool">& Social Media</h4>
 				<!--<p class="text description">The mountains are calling</p>-->
 			</div>
 
-			<div class="info next--info">
+			<div class="info next--info ">
 				<h2 class="text name">Software</h2>
-				<h4 class="text location">open Source</h4>
+				<h4 class="text location cool">open Source</h4>
 				<!--<p class="text description">Adventure is never far away</p>-->
 			</div>
 
-			<div class="info previous--info">
+			<div class="info previous--info ">
 				<h2 class="text name">Hardware</h2>
-				<h4 class="text location">to touch</h4>
+				<h4 class="text location ">to touch</h4>
 				<!--<p class="text description">Let your dreams come true</p>-->
 			</div>
 		</div>
