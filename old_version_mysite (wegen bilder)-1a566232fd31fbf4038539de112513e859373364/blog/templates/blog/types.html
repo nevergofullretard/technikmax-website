@@ -1,0 +1,5 @@
+
+{%for type in types%}
+    <li><a title="Alle {{type}}" href="{%url 'types' name=type.tag_name%}">{{type}}</a></li>
+
+{%endfor%}

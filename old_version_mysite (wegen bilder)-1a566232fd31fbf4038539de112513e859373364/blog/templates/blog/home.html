@@ -1,0 +1,165 @@
+{% extends "blog/base.html" %}
+
+
+{% block herotext %}
+
+
+
+<style>
+    .hero-image{
+    height:100vh;
+    }
+
+   a:hover {
+    text-decoration:none;
+    }
+
+    #topics  span:hover {
+    background-color: #6699ff !important;
+    color: white !important;
+    }
+</style>
+
+<script type="text/javascript">
+$( "#navbar" ).removeClass( "navbar-background" )
+
+
+//      function addMeta (title, des, keywords, robots) {
+//       $('#base-title').text(title);
+//       $('meta[name ="description"]').attr("content", des);
+//       $('meta[name ="keywords"]').attr("content", keywords);
+//       $('meta[name ="robots"]').attr("content", robots);
+//       console.log($('meta[name ="description"]').attr("content"));
+//         return 0;
+//       }
+
+// console.log($('meta[name ="description"]').attr("content"));
+
+
+
+
+</script>
+
+
+
+    <div id="hero-text" class="hero-text">
+        <h1 style="color:white; font-stretch:expanded ">{{title}}</h1>
+
+    </div>
+
+
+{% endblock herotext%}
+
+{% block content %}
+
+<div style="margin-top: 5%; text-align:center;">
+
+{% if is_paginated %}
+        {%if page_obj.number == 1%}
+
+<div style="margin-bottom: 8%">
+    <span style="font-size:2rem;" >Infos, Tipps & Tricks zu ...</span>
+</div>
+
+
+
+
+      <div class="spinner-stage" id="stage" style="width: 260px; height: 260px;">
+        <div class="spinner">
+            <div class="face1">Software</div>
+            <div class="face2">Hardware</div>
+            <div class="face3">Internet</div>
+            <div class="face4">Datenschutz</div>
+            <div class="face5">Social Media</div>
+            <div class="face6">Lifehacks</div>
+        </div>
+    </div>
+
+<div>
+
+</div>
+    <p style="font-size:1.8rem; margin-top: 15% ">{{des}}</p>
+    <hr>
+
+    <p style="font-size:1.7rem; margin-top: 10%;">Heiße Themen</p>
+
+    <div id="topics" class="row" style="justify-content: center; align-items: center; margin-bottom: 5%;">
+         {%for topic in topics%}
+     <a title="Kategorie {{topic.name}} | Technikmax" class="category_link" href="{% url 'category-detail' name=topic.tag_name %}">
+        <span class="category_box" style="padding: 10px; background-color:#e6e6e6 ;color:{{topic.section.color}}; font-size: 1.2rem" >{{topic}}</span>
+     </a>
+    {%endfor%}
+    </div>
+
+
+    <hr style="margin-top: 5%; margin-bottom: 5%;">
+        {%endif%}
+{%endif%}
+    <div style="font-size: 1.8rem;">
+    <span > Neueste </span>
+
+        {%if types|length < 2%}
+            {%for type in types%}
+                <span>{{type}}</span>
+            {%endfor%}
+        {%elif types|length == 2%}
+            {%for type in types%}
+                {%if forloop.last%}
+                    <span>{{type}}</span>
+                {%else%}
+                    <span>{{type}} & </span>
+                {%endif%}
+            {%endfor%}
+
+        {%elif types|length > 2%}
+            {%for type in types%}
+                {%if forloop.last%}
+                    <span> & {{type}}</span>
+                {%elif forloop.first%}
+                    <span>{{type}}</span>
+                {%else%}
+                   <span>, {{type}}</span>
+                {%endif%}
+            {%endfor%}
+
+        {%endif%}
+
+        {% if is_paginated %}
+            {%if page_obj.number != 1%}
+                <span>(Seite {{page_obj.number}})</span>
+            {%endif%}
+        {%endif%}
+        </div>
+
+
+
+
+
+</div>
+
+
+
+    <div style="text-align:center; margin-top: 20px;   ">
+        <span class="arrow-down"></span>
+    </div>
+
+    {% include "blog/blogs_projects.html" %}
+
+
+    {% include "blog/pagination.html" %}
+
+{% if user.is_authenticated %}
+<hr>
+<h3>Noch nicht veröffentlicht:</h3>
+    {%for obj in unpublished%}
+    <p>{{obj.title}} - <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'post-update' obj.id %}">Bearbeiten</a></p>
+    {%endfor%}
+
+<hr>
+
+{%endif%}
+
+
+
+{% endblock content %}
+

@@ -1,0 +1,51 @@
+{% extends "blog/base.html" %}
+
+
+{% block content %}
+{% include "blog/navbar.html" %}
+{% include "blog/category_hover.html" %}
+
+
+<style>
+
+    a:hover h2{
+    color:#6699ff;
+    }
+
+
+</style>
+<h1>Kategorien</h1>
+
+
+
+
+    {%for key, cat in cats.items%}
+    <div style="background-color:white; box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.19); border-radius: 25px 25px 25px 25px; margin-bottom: 5%" >
+    <div class="fill" style="padding:3%;background-color:{{key.color}}; border-radius: 25px 25px 0px 0px; " >
+    </div>
+
+        <div style="padding-bottom: 10%; padding-right: 10%; padding-left: 10%; padding-top: 5%">
+            <a title="Bereich {{key.name}}" href="{% url 'sections' name=key.tag_name %}">
+                <h2 style="margin-bottom: 10px;">{{key}}</h2>
+            </a>
+
+            <div class="row" style="padding-top: 3%">
+            {%for c in cat%}
+
+                     <a title="Kategorie {{c.name}}" class="category_link" href="{% url 'category-detail' name=c.tag_name %}">
+                        <span class="category_box" style="padding: 12px; border-radius: 10px; font-weight:bold; color: {{key.color}}; font-size: 1.2rem" >{{c}}</span>
+                    </a>
+
+
+
+            {%endfor%}
+            </div>
+        </div>
+    </div>
+{%endfor%}
+
+
+
+
+
+{% endblock content %}

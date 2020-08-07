@@ -1,0 +1,107 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+<head>
+    <meta charset="UTF-8">
+    <title>Max Hunter</title>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'blog/style.css' %}">
+
+</head>
+<body>
+ <header class="container site-header home ">
+<div class="row">
+    <div class="col">
+
+     <nav class="nav">
+            <div class="logo">
+                <a href="#">Max Hutner</a>
+            </div>
+            <div id="mainListDiv" class="main_list">
+                <ul class="navlinks">
+                    <li><a href="#">Projekte</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Kategorien</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Kontakt</a></li>
+                </ul>
+            </div>
+            <span class="navTrigger">
+                <i></i>
+                <i></i>
+                <i></i>
+            </span>
+        </nav>
+
+    </div>
+</div>
+
+     <div class="row">
+         <h1>hello</h1>
+     </div>
+ </header>
+
+<main role="main" class="container">
+
+    <div class="row">
+        <div class="col-md-8">
+
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ messages.tags }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+            {% block content %}{% endblock %}
+        </div>
+        <div class="col-md-4">
+          <div class="content-section">
+            <h3>Wichtiges</h3>
+            <p class='text-muted'>Grundfunktionen, die du genießen kannst
+              <ul class="list-group">
+                <li class="list-group-item list-group-item-light">Alle Vocabeln</li>
+                <li class="list-group-item list-group-item-light">Vocabeln für heute</li>
+                <li class="list-group-item list-group-item-light">Calendars</li>
+                <li class="list-group-item list-group-item-light">etc</li>
+              </ul>
+            </p>
+          </div>
+        </div>
+      </div>
+
+</main>
+<!-- Jquery needed -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="js/scripts.js"></script>
+
+<!-- Function used to shrink nav bar removing paddings and adding black background -->
+    <script>
+        $(window).scroll(function() {
+            if ($(document).scrollTop() > 50) {
+                $('.nav').addClass('affix');
+                console.log("OK");
+            } else {
+                $('.nav').removeClass('affix');
+            }
+        });
+
+
+        $('.navTrigger').click(function () {
+    $(this).toggleClass('active');
+    console.log("Clicked menu");
+    $("#mainListDiv").toggleClass("show_list");
+    $("#mainListDiv").fadeIn();
+
+});
+    </script>
+</body>
+</html>
+
+

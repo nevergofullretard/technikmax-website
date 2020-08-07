@@ -1,0 +1,163 @@
+{% include "blog/category_hover.html" %}
+
+<style type="text/css">
+
+    #share-buttons img {
+    width: 50px;
+    padding: 5px;
+    border: 0;
+    box-shadow: 0;
+    display: inline;
+
+    }
+
+</style>
+
+{%if newest.number > 1%}
+        <div class="article_box" >
+   {% if object.background_image %}
+    <div class="fill" style="padding:15%;background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+url('{{object.background_image.image.url}}');border-radius: 25px 25px 0px 0px;" >
+    </div>
+    {%else%}
+        <div class="fill" style="padding:3%; background-color:{{object.categories.first.section.color}}; border-radius: 25px 25px 0px 0px; " >
+        </div>
+    {%endif%}
+
+    <div class="content_box">
+        <h1 style="margin-bottom: 10px; font-size: 2rem">{{object.title}}</h1>
+        {% for cat in object.categories.all %}
+            <span class="category_box" style="color:{{cat.section.color}};" >{{cat}}</span>
+
+          {%endfor%}
+
+
+    </div>
+
+
+    </div> <!-- das bewirkt dann die kleine Ansicht des Posts -->
+    {%else%}
+
+
+        <div style="text-decoration: none; margin-top: 20px;">
+
+                    <div style="background-color:white; box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.19); border-radius: 25px 25px 25px 25px; margin-bottom: 5%" >
+                       {% if object.background_image %}
+                            <div class="fill" style="padding:25%;background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+                                url('{{object.background_image.image.url}}');border-radius: 25px 25px 0px 0px; " >
+                            </div>
+                        {%else%}
+                            <div class="fill" style="padding:3%; background-color:{{object.categories.first.section.color}}; border-radius: 25px 25px 0px 0px; " >
+                            </div>
+                        {%endif%}
+
+            <div style="padding-bottom: 10%; padding-right: 10%; padding-left: 10%; padding-top: 5%">
+               <h1 style="margin-bottom: 10px; font-size: 2rem">{{object.title}}</h1>
+                <div class="row">
+                    <div class="col">
+
+
+
+                        {% for cat in object.categories.all %}
+                         <a title="Kategorie {{cat.name}}" class="category_link" href="{% url 'category-detail' name=cat.tag_name %}">
+                            <span class="category_box" style=" padding: 10px; border-radius: 5px; font-weight:bold; color:{{cat.section.color}};" >{{cat}}</span>
+                         </a>
+                      {%endfor%}
+
+
+
+                    </div>
+                </div>
+
+
+
+                <div style="padding-top: 10px;">
+                    <span style="color: {{object.font_color}}">{{ object.date|date:"d.m.Y" }}, </span>
+                    <a href="{%url 'about'%}" style="color:black">
+                     <small  style="color: {{object.font_color}}">von {{ object.author.first_name }} {{ object.author.last_name }}</small>
+                    </a>
+                </div>
+
+
+
+                <div style="padding-top: 20px;">
+                    <p style="font-size: 1.2rem; font-weight: bold">{{object.description}}</p>
+               <p>{{ object.content|safe }}</p>
+                </div>
+
+            </div>
+
+
+
+
+<!-- I got these buttons from simplesharebuttons.com -->
+<div id="share-buttons" style="text-align:center; padding-bottom: 20px;">
+    <hr>
+    <p>
+        Share this on
+    </p>
+
+    <!-- Twitter -->
+    <a title="Twitter Share | {{object.title}}" href="javascript:void(window.open('https://twitter.com/intent/tweet?url={{request.build_absolute_uri}}&text={{title}','sharer','toolbar=0,status=0,width=626,height=400'))" class="share__link">
+        <img src="https://simplesharebuttons.com/images/somacro/twitter.png" alt="Twitter" />
+    </a>
+
+     <!-- Facebook -->
+    <a title="Facebook Share | {{object.title}}"  href="javascript:void(window.open('https://www.facebook.com/sharer/sharer.php?u={{request.build_absolute_uri}}','sharer','toolbar=0,status=0,width=626,height=400'))" class="share__link">
+
+        <img src="https://simplesharebuttons.com/images/somacro/facebook.png" alt="Facebook" />
+    </a>
+
+    <!-- Email -->
+    <a title="E-Mail Share | {{object.title}}"  href="mailto:?Subject={{ title }} Buttons&amp;Body=Schau%20dir%20diesen%20neuen%20Artikel%20von%20Max%20Hunter%20an!%20 {{ request.build_absolute_uri }}">
+        <img src="https://simplesharebuttons.com/images/somacro/email.png" alt="Email" />
+    </a>
+
+    <a title="WhatsApp Share | {{object.title}}"  href="whatsapp://send?text={{request.build_absolute_uri}}">
+        <img  height="55px" width="55px"  src="/static/blog/whatsapp-icon.png" alt="Whatsapp Icon">
+    </a>
+
+
+
+                        </div>
+                     </div>
+
+        <div>
+
+{%endif%}
+
+
+
+
+    {%if object.next%}
+         <h2 style="text-align:center;">Fortsetzung</h2>
+
+                <div style="text-align:center; margin-top: 20px;   ">
+                    <span class="arrow-down"></span>
+                </div>
+        {%include "blog/next_post.html" %}
+
+    {%endif%}
+
+
+    {%if newest%}
+            <hr>
+            {%if newest.number > 1%}
+                <h2 style="text-align:center">Ähnliche Beiträge zu „{{object.title}}“</h2>
+                <p style="text-align:center; font-size:1.5rem;">(Seite {{newest.number}})</p>
+            {%else%}
+
+                <h2 style="text-align:center">Ähnliche Beiträge</h2>
+            {%endif%}
+                <div style="text-align:center; margin-top: 20px;   ">
+                    <span class="arrow-down"></span>
+                </div>
+        {%for object in newest%}
+            {%include "blog/next_post.html" %}
+        {%endfor%}
+
+        {%include "blog/pagination_newest.html"%}
+    {%endif%}
+
+
+</div>

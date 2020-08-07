@@ -1,0 +1,23 @@
+{% if newest.paginator.num_pages >= 2 %}
+
+        <div style="text-align: center">
+            {% if newest.has_previous %}
+        <a class="btn btn-outline-dark mb-4" href="?page=1"><<</a>
+        <a class="btn btn-outline-dark mb-4" href="?page={{ newest.previous_page_number }}"><</a>
+      {% endif %}
+
+      {% for num in newest.paginator.page_range %}
+        {% if newest.number == num %}
+          <a class="btn btn-success mb-4" href="?page={{ num }}">{{ num }}</a>
+        {% elif num > newest.number|add:'-3' and num < newest.number|add:'3' %}
+          <a class="btn btn-outline-dark mb-4" href="?page={{ num }}">{{ num }}</a>
+        {% endif %}
+      {% endfor %}
+
+      {% if newest.has_next %}
+        <a class="btn btn-outline-dark mb-4" href="?page={{ newest.next_page_number }}">></a>
+        <a class="btn btn-outline-dark mb-4" href="?page={{ newest.paginator.num_pages }}">>></a>
+
+        </div>
+    {% endif %}
+{% endif %}

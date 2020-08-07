@@ -1,0 +1,325 @@
+{% extends "blog/base.html" %}
+{% block content %}
+{% include "blog/navbar.html" %}
+
+
+
+<script>
+$.fn.insertAtCaret = function(text) {
+    return this.each(function() {
+        if (document.selection && this.tagName == 'TEXTAREA') {
+            //IE textarea support
+            this.focus();
+            sel = document.selection.createRange();
+            sel.text = text;
+            this.focus();
+        } else if (this.selectionStart || this.selectionStart == '0') {
+            //MOZILLA/NETSCAPE support
+            startPos = this.selectionStart;
+            endPos = this.selectionEnd;
+            scrollTop = this.scrollTop;
+            this.value = this.value.substring(0, startPos) + text + this.value.substring(endPos, this.value.length);
+            this.focus();
+            this.selectionStart = startPos + text.length;
+            this.selectionEnd = startPos + text.length;
+            this.scrollTop = scrollTop;
+        } else {
+            // IE input[type=text] and other browsers
+            this.value += text;
+            this.focus();
+            this.value = this.value;    // forces cursor to end
+        }
+    });
+};
+
+
+
+i = 0;
+$(document).ready(function(){
+var content = $("textarea[name=content]");
+
+$('select[name=bild]').change(function() {
+    var changed = $(this).val() != $(this).data('default');
+    content.insertAtCaret('<img src="'+ $(this).val() + '" width="" height="">')
+    <!--alert(changed ? 'changed' : 'not changed');-->
+});
+
+var availableColleges = [
+  {% for clg in users %}
+      "{{clg}}",
+  {% endfor %}];
+
+
+
+
+
+
+    <!--$("#").click(function(){-->
+        <!--content.insertAtCaret("")-->
+    <!--});-->
+
+
+     $("#link").click(function(){
+        content.insertAtCaret('<a href=""></a>')
+    });
+
+     $("#bold").click(function(){
+        content.insertAtCaret("<b></b>")
+    });
+
+     $("#italic").click(function(){
+        content.insertAtCaret("<i></i>")
+    });
+
+     $("#style").click(function(){
+        content.insertAtCaret('style=""')
+    });
+
+    $("#center").click(function(){
+        content.insertAtCaret("text-align: center;")
+    });
+
+     $("#table").click(function(){
+        content.insertAtCaret('<table class="table table-striped">\n <thead class="thead">\n<tr>\n<th scope="col">1</th>\n<th scope="col">2</th>\n</tr> \n</thead> \n<tbody> \n<tr> \n<td>1</td>\n<td>2</td> \n</tr> \n</tbody> \n</table>')
+        <!--content.insertAtCaret('\nhello')-->
+    });
+
+     $("#row").click(function(){
+        content.insertAtCaret("<tr></tr>")
+    });
+
+     $("#col").click(function(){
+        content.insertAtCaret("<td></td>")
+    });
+
+     $("#h1").click(function(){
+        content.insertAtCaret("<h1></h1>")
+    });
+
+     $("#h2").click(function(){
+        content.insertAtCaret("<h2></h2>")
+    });
+
+     $("#h3").click(function(){
+        content.insertAtCaret("<h3></h3>")
+    });
+
+     $("#h4").click(function(){
+        content.insertAtCaret("<h4></h4>")
+    });
+
+     $("#h5").click(function(){
+        content.insertAtCaret("<h5></h5>")
+    });
+    $("#small").click(function(){
+        content.insertAtCaret("<small></small>")
+    });
+
+    $("#p").click(function(){
+        content.insertAtCaret("<p></p>")
+    });
+    $("#span").click(function(){
+        content.insertAtCaret("<span></span>")
+    });
+
+ $("#ol").click(function(){
+        content.insertAtCaret("<ol>\n\n</ol>")
+    });
+
+    $("#ul").click(function(){
+        content.insertAtCaret("<ul>\n\n</ul>")
+    });
+
+    $("#li").click(function(){
+        content.insertAtCaret("<li></li>")
+    });
+
+    $("#container").click(function(){
+            content.insertAtCaret("<div class='container'>\n\n</div>")
+        });
+
+    $("#bt-row").click(function(){
+        content.insertAtCaret("<div class='row'>\n\n</div>")
+    });
+
+    $("#bt-col").click(function(){
+        content.insertAtCaret("<div class='col'>\n\n</div>")
+    });
+
+
+    $("#text-muted").click(function(){
+        content.insertAtCaret("class='text-muted'")
+    });
+    var vorschau = $("#content-vorschau")
+    vorschau.html(content.val())
+
+    <!--VIELLEICHT WICHTIG FUER SPAETER!!!-->
+    content.click(function() {
+        console.log(content.val());
+        console.log(content.prop('selectionStart'));
+
+    });
+
+
+
+    content.keyup(function() {
+        vorschau.html(content.val())
+    });
+
+
+
+
+   <!--var z =  select: function(event, ui) {-->
+        <!--$("#markieren").val(ui.item.id)-->
+    <!--};-->
+   <!--console.log(z);-->
+
+   <!--var title = $( "#title" );-->
+   <!--title.val(title.val + z);-->
+
+
+
+
+  <!--$("#title").keydown(function(event){-->
+    <!--&lt;!&ndash;$("#keypresses").text(i += 1);&ndash;&gt;-->
+    <!--var str = $("#title").val();-->
+    <!--&lt;!&ndash;var n = str.length;&ndash;&gt;-->
+    <!--&lt;!&ndash;document.getElementById("span2").innerHTML = str;&ndash;&gt;-->
+
+  <!--if (event.which == 81) {-->
+  <!--$("#title").val(-->
+  <!--function(n,c){-->
+     <!--console.log(n);-->
+     <!--console.log(c);-->
+  <!--});-->
+
+  <!--var last = $("#title").last()-->
+  <!--console.log(last);-->
+
+    <!--$( "#title" ).autocomplete({-->
+    <!--source: availableColleges,-->
+    <!--});-->
+
+    <!--$("#span1").html("Key: " + event.which);-->
+    <!--}-->
+   <!--});-->
+
+
+});
+</script>
+
+
+    <div class="content-section">
+
+
+        <form method="POST">
+            {%  csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Blog Post</legend>
+
+
+
+
+                                {% if user.is_staff %}
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm">
+                            <span id="link" class="border border-dark rounded"> link </span>
+                            <span id="bold" class="border border-dark rounded"><b> B </b></span>
+                            <span id="italic" class="border border-dark rounded"><i> Italic </i></span><br>
+                            <a href="https://www.w3schools.com/colors/colors_picker.asp" target="_blank">Color picker</a><br>
+                            <a href="https://www.w3schools.com/cssref/default.asp" target="_blank">CSS Reference</a>
+                        </div>
+
+
+                        <div class="col-sm">
+
+                            <div class="dropdown">
+                                  <button class="btn btn-info dropdown-toggle" type="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Elements
+                                  </button>
+                                   <div class="dropdown-menu">
+                                       <small class="dropdown-item" id="span">span</small>
+                                        <small class="dropdown-item" id="small">small</small>
+                                       <small class="dropdown-item" id="p">p</small>
+                                       <small class="dropdown-item" id="h1">h1</small>
+                                       <small class="dropdown-item" id="h2">h2</small>
+                                       <small class="dropdown-item" id="h3">h3</small>
+                                       <small class="dropdown-item" id="h4">h4</small>
+                                       <small class="dropdown-item" id="h5">h5</small>
+
+                                    </div>
+                                </div>
+                        </div>
+
+                        <div class="col-sm">
+                              <div class="dropdown">
+                                  <button class="btn btn-warning dropdown-toggle" type="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Style
+                                  </button>
+                                   <div class="dropdown-menu">
+                                       <small class="dropdown-item" id="style">Style Tag</small>
+                                       <small class="dropdown-item" id="center">text center</small>
+                                       <small class="dropdown-item" id="text-muted">text muted</small>
+                                    </div>
+                                </div>
+                        </div>
+
+                        <div class="col-sm">
+                              <div class="dropdown">
+                                  <button class="btn btn-success dropdown-toggle" type="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Tabelle
+                                  </button>
+                                   <div class="dropdown-menu">
+                                       <small class="dropdown-item" id="ol">ol</small>
+                                       <small class="dropdown-item" id="ul">ul</small>
+                                       <small class="dropdown-item" id="li">li</small>
+                                       <small class="dropdown-item" id="table">Tabelle</small>
+                                       <small class="dropdown-item" id="row">row</small>
+                                       <small class="dropdown-item" id="col">column</small>
+
+                                    </div>
+                                </div>
+
+                        </div>
+                        <div class="col-sm">
+                            <div class="dropdown">
+                                  <button class="btn btn-danger dropdown-toggle" type="button"  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Bootstrap
+                                  </button>
+                                   <div class="dropdown-menu">
+                                       <small class="dropdown-item" id="container">container</small>
+                                       <small class="dropdown-item" id="bt-row">row</small>
+                                       <small class="dropdown-item" id="bt-col">col</small>
+
+
+                                    </div>
+                                </div>
+
+                                {{image}}
+
+                        </div>
+
+
+                    </div>
+                </div>
+                {%endif%}
+
+
+
+                {{  form }}
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Post</button>
+
+            </div>
+        </form>
+
+        {%if user.is_staff%}
+    <h2>Vorschau</h2>
+    <div id="content-vorschau"></div>
+    {%endif%}
+    </div>
+
+
+{% endblock content %}
