@@ -1,0 +1,35 @@
+section {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+section:nth-of-type(2) {
+  background: #eee;
+}
+
+span {
+  position: absolute;
+  display: block;
+  text-align: center;
+  font-size: 50px;
+  z-index: 2;
+  width: 50%;
+  text-transform: uppercase;
+  font-weight: 900;
+  color: white;
+  top: calc(50vh - 56px);
+}
+span.up {
+  right: 0;
+}
+span.down {
+  left: 0;
+}
+
+.box {
+  height: 1.2vh;
+  width: 50vw;
+  margin-bottom: -0.2vh;
+  background: teal;
+  display: block;
+}

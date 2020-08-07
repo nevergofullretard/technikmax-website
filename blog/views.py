@@ -296,6 +296,7 @@ def upload_image(request):
         form = UploadImageForm(request.POST or None, request.FILES or None)
         name = request.POST.get('name')
         type = request.FILES['image'].content_type.split('/')[1]
+        print(type)
         new_name = str(name) + "." + str(type)
 
         request.FILES['image'].name = new_name

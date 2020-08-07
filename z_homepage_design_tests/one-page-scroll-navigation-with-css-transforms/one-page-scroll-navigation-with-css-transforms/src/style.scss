@@ -1,0 +1,183 @@
+/* The version of Bourbon used in this Pen was 4.* */
+@import "bourbon";
+
+$lgtBlue: #43bed6;
+*, *:before, *:after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+.inner {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+body {
+  @media (max-width: 767px) {
+    & {
+      font-size: 70%;
+    }
+  }
+}
+.wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: transform 1.5s;
+  perspective: 3000;
+  transform-style: preserve-3d;
+  
+  .page {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform: rotateX(180deg) scale(0.3);
+    backface-visibility: hidden;
+    transition: transform 1s ease-in-out;
+    will-change: transform;
+    
+    h2 {
+      color: #fff;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translateX(-50%) translateY(-50%);
+      text-transform: uppercase;
+      font-size: 3em;
+    }
+    
+    &.page1 {
+      @include linear-gradient(10deg, #66a6b8 20%, #5471B9 80%);
+    }
+    
+    &.page2 {
+      @include linear-gradient(45deg, #f29c54 0%, #DB4367 100%);
+    }
+    
+    &.page3 {
+      @include linear-gradient(135deg, #23af56 0%, #67A79A 100%);
+    }
+    
+    &.page4 {
+      @include linear-gradient(160deg, #412F2F 15%, #6B2686 85%);
+    }
+  }
+  
+  @for $i from 1 through 10 {
+    &.active-page#{$i} {
+      transform: translateY(-($i - 1)*100%);
+      
+      .page.page#{$i} {
+        transform: scale(1);
+      }
+    }
+  }
+
+}
+
+.nav-panel {
+  position: fixed;
+  top: 50%;
+  right: 2%;
+  transform: translateY(-50%);
+  z-index: 1000;
+  transition: opacity 0.5s, transform 0.5s cubic-bezier(0.57, 1.2, 0.68, 2.6);
+  will-change: transform, opacity;
+
+  &.invisible {
+    opacity: 0;
+    transform: translateY(-50%) scale(0.5);
+  }
+
+  ul {
+    list-style-type: none;
+
+    .nav-btn {
+      position: relative;
+      overflow: hidden;
+      width: 1em;
+      height: 1em;
+      margin-bottom: 0.5em;
+      border: 0.12em solid #fff;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: border-color, transform 0.3s;
+      will-change: border-color, transform;
+
+      &:after {
+        @extend .inner;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        transform: translateX(-50%) translateY(-50%) scale(0.3);
+        background-color: #fff;
+        opacity: 0;
+        transition: transform, opacity 0.3s;
+        will-change: transform, opacity;
+      }
+
+      &.active:after, &:hover:after {
+        transform: translateX(-50%) translateY(-50%) scale(0.7);
+        opacity: 1;
+      }
+      &:hover {
+        border-color: yellow;
+        transform: scale(1.2);
+      }
+      &:hover:after {
+        background-color: yellow;
+      }
+    }
+  }
+
+  .scroll-btn {
+    position: absolute;
+    left: 0;
+    width: 1em;
+    height: 1em;
+    border: 0.2em solid #fff;
+    border-left: none;
+    border-bottom: none;
+    cursor: pointer;
+    transform-origin: 50% 50%;
+    transition: border-color 0.3s;
+
+    &.up {
+      top: -1.6em;
+      transform: rotate(-45deg);
+    }
+    &.down {
+      bottom: -1.2em;
+      transform: rotate(135deg);
+    }
+
+    &:hover {
+      border-color: yellow;
+    }
+  }
+
+}
+
+.check-out {
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 2rem;
+  color: #fff;
+  
+  a {
+    color: rgba(255,170,170,1);
+    text-decoration: none;
+    padding-bottom: 0.3rem;
+    border-bottom: 0.2rem solid;
+  }
+}
