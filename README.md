@@ -1,2 +1,2 @@
 # mysite
-django mysite for personal "maxhunter" website
+django site created with python for personal "technikmax" website
